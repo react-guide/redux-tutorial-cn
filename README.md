@@ -1,6 +1,10 @@
 redux-tutorial
 =========================
 
+本文档正在翻译中，欢迎认领 [Issue](https://github.com/react-guide/redux-tutorial-cn/issues)，和我们一起完善。
+
+英文原版：https://github.com/happypoulp/redux-tutorial/
+
 This repository contains a step by step tutorial to help grasp flux and more specifically [Redux](https://github.com/rackt/redux).
 
 The official and very exhaustive Redux documentation is available [here](http://redux.js.org/) and should be your number one source of truth regarding Redux. The present tutorial will only offer you an introduction to flux concepts through Redux use. For further or more detailed info, please refer to the Redux documentation.
@@ -30,3 +34,5 @@ Being real js files, each example can be run to verify that it works as intended
 `npm run example 01_simple-action-creator.js`
 
 Enjoy!
+
+**本文档翻译流程符合 [ETC 翻译规范](https://github.com/react-guide/ETC)，欢迎你来一起完善**
