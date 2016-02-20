@@ -1,4 +1,4 @@
-// Tutorial 11 - Provider-and-connect.js
+// 章节 11 - Provider-and-connect.js
 
 // This is the final tutorial and the one that will show you how to bind together Redux and React.
 

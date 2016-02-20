@@ -1,4 +1,4 @@
-// Tutorial 06 - dispatch-action.js
+// 章节 6 - dispatch-action.js
 
 // So far we've focused on building our reducer(s) and we haven't dispatched any of our own actions.
 // We'll keep the same reducers from our previous tutorial and handle a few actions:

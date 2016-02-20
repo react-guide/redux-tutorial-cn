@@ -1,4 +1,4 @@
-// Tutorial 07 - dispatch-async-action-1.js
+// 章节 7 - dispatch-async-action-1.js
 
 // We previously saw how we can dispatch actions and how those actions will modify
 // the state of our application thanks to reducers.

@@ -1,4 +1,4 @@
-// Tutorial 09 - middleware.js
+// 章节 9 - middleware.js
 
 // We left dispatch-async-action-2.js with a new concept: "middleware". Somehow middleware should help us
 // to solve async action handling. So what exactly is middleware?

@@ -1,4 +1,4 @@
-// Tutorial 0 - introduction.js
+// 章节 0 - introduction.js
 
 // Why this tutorial?
 // While trying to learn Redux, I realized that I had accumulated incorrect knowledge about flux through

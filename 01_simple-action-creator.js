@@ -4,7 +4,7 @@
 
 // 其实，通过几行简单的代码就可以解释清楚了！
 
-// action creator 仅仅一个函数...
+// action creator 就是函数而已...
 var actionCreator = function() {
     // ...负责构建一个 action （是的，action creator 这个名字已经很明显了）并返回它
     return {
@@ -15,7 +15,7 @@ var actionCreator = function() {
 // 这就完了？是的，就是这样。
 
 // 然而，有一件事情需要注意，那就是 action 的格式。在 flux 中，一般约定 action 是一个拥有 “type” 属性的对象。
-// 这个 “type” 可以在以后处理 action 时被使用。当然，action 依旧可以拥有其他属性，你可以任意存放想要的数据。
+// 这个 “type” 在以后处理 action 时会用到。当然，action 依旧可以拥有其他属性，你可以任意存放想要的数据。
 
 // 在后面的章节中，我们会发现 action creator 实际上可以返回 action 以外的其他东西，比如一个函数。
 // 这在异步 action 处理中极为有用（更多的内容可以查阅 dispatch-async-action.js）。

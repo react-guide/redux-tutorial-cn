@@ -1,4 +1,4 @@
-// Tutorial 03 - simple-reducer.js
+// 章节 3 - simple-reducer.js
 
 // Now that we know how to create a Redux instance that will hold the state of our application
 // we will focus on those reducer functions that will allow us to transform this state.

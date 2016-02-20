@@ -1,4 +1,4 @@
-// Tutorial 05 - combine-reducers.js
+// 章节 5 - combine-reducers.js
 
 // We're now starting to get a grasp of what a reducer is...
 

@@ -1,4 +1,4 @@
-// Tutorial 08 - dispatch-async-action-2.js
+// 章节 8 - dispatch-async-action-2.js
 
 // Let's try to run the first async action creator that we wrote in dispatch-async-action-1.js.
 

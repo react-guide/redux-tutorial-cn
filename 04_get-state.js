@@ -1,4 +1,4 @@
-// Tutorial 04 - get-state.js
+// 章节 4 - get-state.js
 
 // How do we retrieve the state from our Redux instance?
 

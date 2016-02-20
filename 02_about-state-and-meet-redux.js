@@ -1,4 +1,4 @@
-// Tutorial 02 - about-state-and-meet-redux.js
+// 章节 2 - about-state-and-meet-redux.js
 
 // Sometimes the actions that we'll handle in our application will not only inform us
 // that something happened but also tell us that data needs to be updated.

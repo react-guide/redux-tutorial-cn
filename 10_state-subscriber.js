@@ -1,4 +1,4 @@
-// Tutorial 10 - state-subscriber.js
+// 章节 10 - state-subscriber.js
 
 // We're close to having a complete Flux loop but we still miss one critical part:
 
