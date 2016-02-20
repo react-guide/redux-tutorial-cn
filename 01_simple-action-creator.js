@@ -1,47 +1,41 @@
-// Tutorial 1 - simple-action-creator.js
+// 章节 1 - simple-action-creator.js
 
-// We started to talk a little about actions in the introduction but what exactly are those "action creators"
-// and how are they linked to "actions"?
+// 我们在前言中已经简单提到过 action，但具体什么是 "action creator"，它们又是如何关联到 "action" 的呢？
 
-// It's actually so simple that a few lines of code can explain it all!
+// 其实，通过几行简单的代码就可以解释清楚了！
 
-// The action creator is just a function...
+// action creator 仅仅一个函数...
 var actionCreator = function() {
-    // ...that creates an action (yeah, the name action creator is pretty obvious now) and returns it
+    // ...负责构建一个 action （是的，action creator 这个名字已经很明显了）并返回它
     return {
         type: 'AN_ACTION'
     }
 }
 
-// So is that all? yes.
+// 这就完了？是的，就是这样。
 
-// However, one thing to note is the format of the action. This is kind of a convention in flux
-// that the action is an object that contains a "type" property. This type allows for further
-// handling of the action. Of course, the action can also contain other properties to
-// pass any data you want.
+// 然而，有一件事情需要注意，那就是 action 的格式。在 flux 中，一般约定 action 是一个拥有 “type” 属性的对象。
+// 这个 “type” 可以在以后处理 action 时被使用。当然，action 依旧可以拥有其他属性，你可以任意存放想要的数据。
 
-// We'll also see later that the action creator can actually return something other than an action,
-// like a function. This will be extremely useful for async action handling (more on that
-// in dispatch-async-action.js).
+// 在后面的章节中，我们会发现 action creator 实际上可以返回 action 以外的其他东西，比如一个函数。
+// 这在异步 action 处理中极为有用（更多的内容可以查阅 dispatch-async-action.js）。
 
-// We can call this action creator and get an action as expected:
+// 我们可以直接调用 action creator，如同预期的一样，我们会得到一个 action：
 console.log(actionCreator())
-// Output: { type: 'AN_ACTION' }
+// 输出： { type: 'AN_ACTION' }
 
-// Ok, this works but it does not go anywhere...
-// What we need is to have this action be sent somewhere so that
-// anyone interested could know that something happened and could act accordingly.
-// We call this process "Dispatching an action".
+// 好了，以上代码没有任何问题，但是，啥用也没有...
+// 在实际的场景中，我们需要的是将 action 发送到某个地方，让任何关心它的人知道发生了什么，并且做出相应的处理。
+// 我们将这个过程称之为“分发 action（Dispatching an action）”。
 
-// To dispatch an action we need... a dispatch function ("Captain obvious").
-// And to let anyone interested know that an action happened, we need a mechanism to register
-// "handlers". Such "handlers" to actions in traditional flux application are called stores and
-// we'll see in the next section how they are called in redux.
+// 为了分发 action，我们需要...一个分发函数（=￣ω￣=）。
+// 并且，为了让任何对它感兴趣的人可以感知到 action 被发起，我们还需要一个注册“处理器（handlers）”的机制。
+// 这些 action 的“处理器”在传统的 flux 应用中被称为 store，在下个章节中，我们会了解到它们在 redux 中被称为什么。
 
-// So far here is the flow of our application:
+// 到目前为止，我们的应用中包含了以下流程：
 // ActionCreator -> Action
 
-// Read more about actions and action creators here:
+// 可以在以下链接中了解更多关于 action 和 action creator 的内容：
 // http://rackt.org/redux/docs/recipes/ReducingBoilerplate.html
 
-// Go to next tutorial: 02_about-state-and-meet-redux.js
+// 下一章节： 02_about-state-and-meet-redux.js
