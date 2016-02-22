@@ -1,18 +1,18 @@
 // 章节 0 - introduction.js
 
-// Why this tutorial?
-// While trying to learn Redux, I realized that I had accumulated incorrect knowledge about flux through
-// articles I read and personal experience. I don't mean that articles about flux are not well written
-// but I just didn't grasp concepts correctly. In the end, I was just applying documentation of different
-// flux frameworks (Reflux, Flummox, FB Flux) and trying to make them match with the theoretical concept I read
-// about (actions / actions creators, store, dispatcher, etc).
-// Only when I started using Redux did I realize that flux is more simple than I thought. This is all
-// thanks to Redux being very well designed and having removed a lot of "anti-boilerplate features" introduced
-// by other frameworks I tried before. I now feel that Redux is a much better way to learn about flux
-// than many other frameworks. That's why I want now to share with everyone, using my own words,
-// flux concepts that I am starting to grasp, focusing on the use of Redux.
+// 为什么要有这个教程呢？
+// 在我尝试学习 Redux 的时候，我意识到我因为一些文章和个人经验，
+// 而积累了一些关于 flux 的错误观念。
+// 我不是说那些 flux 的文章写得不好哦，只是我不能正确地理解那些概念。
+// 到最后，我只是在应用不同的 flux 框架（Reflux、Flummox、FB Flux）的文档，
+// 并且努力去把它们和那些理论性的概念（action/actions creator、store、dispatcher 等等）给联系起来。
+// 等我用了 Redux 之后，我才发现原来flux比我想象的要简单很多。
+// 这些都归功于 Redux 良好的设计和移除了许多其它框架引入的“反样板代码功能（anti-boilerplate features）”。
+// 我现在觉得用 Redux 来学习 flux 比用其他框架来学习要很好多。
+// 这就是为什么我想分享给大家，用我自己的话来说，
+// 通过关注 Redux 的用法来理解 flux 的概念。
 
-// You may have seen this diagram representing the famous unidirectional data flow of a flux application:
+// 你一定已经看过这张著名的 flux 的单向数据流图了。
 
 /*
                  _________               ____________               ___________
@@ -35,57 +35,57 @@
 
 */
 
-// In this tutorial we'll gradually introduce you to concepts of the diagram above. But instead of trying
-// to explain this complete diagram and the overall flow it describes, we'll take each piece separately and try to
-// understand why it exists and what role it plays. In the end you'll see that this diagram makes perfect sense
-// once we understand each of its parts.
+// 在这个教程里，我们会一步步地向你介绍上图里的各个概念。 
+// 我们会把这些概念分成单独的章节来介绍它们存在的意义和作用，
+// 而不会笼统地介绍整张数据流图。
+// 在最后，当我们理解了每一个概念后，我们会发现这张图真是意义深远啊！
 
-// But before we start, let's talk a little bit about why flux exists and why we need it...
-// Let's pretend we're building a web application. What are all web applications made of?
-// 1) Templates / html = View
-// 2) Data that will populate our views = Models
-// 3) Logic to retrieve data, glue all views together and to react accordingly to user events,
-//    data modifications, etc. = Controller
+// 在我们开始之前，我们先聊下一flux存在的意义以及我们为什么需要它。
+// 假设我们正在构建一个网站应用，那么这个网站应用会由什么组成呢？
+// 1) 模板/HTML = View
+// 2) 填充视图的数据 = Model
+// 3) 获取数据，将所有视图组装在一起，
+//    用户事件数据变化时的响应，等等的逻辑 = Controller
 
-// This is the very classic MVC that we all know about. But it actually looks like concepts of flux,
-// just expressed in a slightly different way:
-// - Models look like stores
-// - user events, data modifications and their handlers look like
+// 这就是个非常典型的 MVC，而且它和flux的概念看起来很像的，
+// 只是在某些表述上有些小小的不同：
+// - Model 看起来像 Store
+// - 用户事件、数据变化以及它们的处理程序看起来像
 //   "action creators" -> action -> dispatcher -> callback
-// - Views look like React views (or anything else as far as flux is concerned)
+// - View 看起来像 React views (或者其他什么的)
 
-// So is flux just a matter of new vocabulary? Not exactly. But vocabulary DOES matter, because by introducing
-// these new terms we are now able to express more precisely things that were regrouped under
-// various terminologies... For example, isn't a data fetch an action? Just like a click is also an action?
-// And a change in an input is an action too... Then we're all already used to issuing actions from our
-// applications, we were just calling them differently. And instead of having handlers for those
-// actions directly modify Models or Views, flux ensures all actions go first through something called
-// a dispatcher, then through our stores, and finally all watchers of stores are notified.
+// 所以，flux 就只是一个新词汇表么？不全是，但是词汇表是很重要的，
+// 因为通过引入这些新术语我们可以更准确地表述各种专业术语。
+// 举一个例子，获取数据是一个 action，一个点击是一个 action，
+// 一个input变化也是一个action等等。我们都已经习惯了从我们的应用里分发 action，
+// 只是以不同的方式调用它们。 不同于直接修改 Model 和 View，
+// Flux 确保所有 action 首先通过一个dispatcher，
+// 然后再是store，最后通知所有的store观测者。
 
-// To get more clarity how MVC and flux differ, we'll
-// take a classic use-case in an MVC application:
-// In a classic MVC application you could easily end up with:
-// 1) User clicks on button "A"
-// 2) A click handler on button "A" triggers a change on Model "A"
-// 3) A change handler on Model "A" triggers a change on Model "B"
-// 4) A change handler on Model "B" triggers a change on View "B" that re-renders itself
+// 为了弄清楚MVC和flux的不同，
+// 我们举一个典型的MVC应用的用例：
+// 一个典型的MVC应用的流程大致上是这样的：
+// 1) 用户点击按钮“A”
+// 2) 点击按钮“A”的处理程序触发 Model “A”的改变
+// 3) Model “A”的改变处理程序触发 Model “B”的改变
+// 4) Model “B”的改变处理程序触发 View “B”的改变并重新渲染自身
 
-// Finding the source of a bug in such an environment when something goes wrong can become quite challenging
-// very quickly. This is because every View can watch every Model, and every Model can watch other Models, so
-// basically data can arrive from a lot of places and be changed by a lot of sources (any views or any models).
+// 在这样的一个环境里，当应用出错的时候快速地定位 bug 来源是一件非常困难的事情。
+// 这是因为每个 View 可以监视任何的 Model，
+// 并且每个 Model 可以监视其它所有 Model，所以数据会从四面八方涌来，并且被许多源（view 或者 model）改变。
 
-// Whereas when using flux and its unidirectional data flow, the example above could become:
-// 1) user clicks on button "A"
-// 2) a handler on button "A" triggers an action that is dispatched and produces a change on Store "A"
-// 3) since all other stores are also notified about the action, Store B can react to the same action too
-// 4) View "B" gets notified by the change in Stores A and B, and re-renders
+// 当我们用 flux 以及它的单向数据流的时候，上面的例子就会变成这样子：
+// 1) 用户点击按钮“A”
+// 2) 点击按钮“A”的处理程序会触发一个被分发的 action，并改变 Store “A”
+// 3) 因为其它的 Store 也被这个 action 通知了，所以 Store “B”也会对相同的 action 做出反应
+// 4) View “B”因为 Store  A 和 Store B的改变而收到通知，并重新渲染
 
-// See how we avoid directly linking Store A to Store B? Each store can only be
-// modified by an action and nothing else. And once all stores have replied to an action,
-// views can finally update. So in the end, data always flows in one way:
+// 来看一下我们是如何避免 Store A 和 Store B 直接相关联的。 
+// 每一个 Store 只能被一个 action 修改，别无他选。
+// 并且当所有 Store 回应了 action 后，最终所有 View 都会更新。由此可见，数据总是以一种方式进行流动：
 //     action -> store -> view -> action -> store -> view -> action -> ...
 
-// Just as we started our use case above from an action, let's start our tutorial with
-// actions and action creators.
+// 就像我们从一个 action 开始我们的用例，
+// 让我们以 action 和 action creator 来开始我们的教程。
 
-// Go to next tutorial: 01_simple-action-creator.js
+// 进入到下一个教程：01_simple-action-creator.js
