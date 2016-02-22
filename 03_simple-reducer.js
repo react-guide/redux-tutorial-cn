@@ -1,27 +1,27 @@
 // 章节 3 - simple-reducer.js
 
-// Now that we know how to create a Redux instance that will hold the state of our application
-// we will focus on those reducer functions that will allow us to transform this state.
+// 现在，我们知道如何去创建一个 Redux 实例，并让它管理应用中的 state
+// 同时，我们需要关注的是那些 reducer 函数，因为它们允许我们改变 state。
 
-// A word about reducer VS store:
-// As you may have noticed, in the flux diagram shown in the introduction, we had "Store", not
-// "Reducer" like Redux is expecting. So how exactly do Store and Reducer differ?
-// It's more simple than you could imagine: A Store keeps your data in it while a Reducer doesn't.
-// So in traditional flux, stores hold state in them while in Redux, each time a reducer is
-// called, it is passed the state that needs to be updated. This way, Redux's stores became
-// "stateless stores" and were renamed reducers.
+// 关于 reducer 与 store：
+// 你可能已经注意到，在简介中 flux 的图解显示，我们有 "Store"，并没有
+// 像 Redux 中所拥有的 "Reducer"。那么，Store 与 Reducer 实际上有哪些区别呢？
+// 实际上要比你想象的简单：Store 可以保存你的 data，而 Reducer 不能。
+// 因此在传统的 flux 中，store 可以管理它们的 state，然而在 Redux 中，每次一个 reducer
+// 被调用时，都是通过需要更新的 state 来进行的。这样的话，Redux 的 store 就变成了
+// “无状态的 store” 并且重命名为 reducer。
 
-// As stated before, when creating a Redux instance you must give it a reducer function...
+// 如上所述，在创建一个 Redux 实例前，需要给它一个 reducer 函数...
 
 import { createStore } from 'redux'
 
 var store_0 = createStore(() => {})
 
-// ... so that Redux can call this function on your application state each time an action occurs.
-// Giving reducer(s) to createStore is exactly how redux registers the action "handlers" (read reducers) we
-// were talking about in section 01_simple-action-creator.js.
+// ... 因此当一个 action 发生时，在应用中 Redux 每一次都可以调用这个函数。
+// 给定 reducer(s) 去 createStore，实际上是让 redux 如何注册 action 的 "handlers"（读取 reducers）
+// 这也是我们在 01_simple-action-creator.js 章节中所讨论的。
 
-// Let's put some log in our reducer
+// 在我们的 reducer 中加入一些 log
 
 var reducer = function (...args) {
     console.log('Reducer was called with args', args)
@@ -29,16 +29,16 @@ var reducer = function (...args) {
 
 var store_1 = createStore(reducer)
 
-// Output: Reducer was called with args [ undefined, { type: '@@redux/INIT' } ]
+// 输出：Reducer was called with args [ undefined, { type: '@@redux/INIT' } ]
 
-// Did you see that? Our reducer is actually called even if we didn't dispatch any action...
-// That's because to initialize the state of the application,
-// Redux actually dispatches an init action ({ type: '@@redux/INIT' })
+// 看出来了吗？实际上，我们的 reducer 被调用时是没有 dispatch 任何的 action...
+// 这是因为初始化了应用的 state，
+// 实际上，Redux dispatch 了一个初始化的 action ({ type: '@@redux/INIT' })
 
-// When called, a reducer is given those parameters: (state, action)
-// It's then very logical that at an application initialization, the state, not being
-// initialized yet, is "undefined"
+// 在被调用时，一个 reducer 会得到这些参数：(state, action)
+// 在应用初始化后，state 还没被初始化，那么它的值是 "undefined" 的，
+// 这是非常符合逻辑的
 
-// But then what is the state of our application after Redux sends its "init" action?
+// 在 Redux 发送 "init" action 之后，我们应用中的 state 又会是怎么样的呢？
 
-// Go to next tutorial: 04_get-state.js
+// 下一章节：04_get-state.js
