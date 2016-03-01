@@ -1,6 +1,6 @@
 // 章节 8 - dispatch-async-action-2.js
 
-// Let's try to run the first async action creator that we wrote in dispatch-async-action-1.js.
+// 运行之前我们在 dispatch-async-action-1.js 中实现的第一个异步 action creator：
 
 import { createStore, combineReducers } from 'redux'
 
@@ -35,7 +35,7 @@ var asyncSayActionCreator_1 = function (message) {
 console.log("\n", 'Running our async action creator:', "\n")
 store_0.dispatch(asyncSayActionCreator_1('Hi'))
 
-// Output:
+// 输出：
 //     ...
 //     /Users/classtar/Codes/redux-tutorial/node_modules/redux/node_modules/invariant/invariant.js:51
 //         throw error;
@@ -43,11 +43,10 @@ store_0.dispatch(asyncSayActionCreator_1('Hi'))
 //     Error: Invariant Violation: Actions must be plain objects. Use custom middleware for async actions.
 //     ...
 
-// It seems that our function didn't even reach our reducers. But Redux has been kind enough to give us a
-// tip: "Use custom middleware for async actions.". It looks like we're on the right path but what is this
-// "middleware" thing?
+// 我们所设计的 function 似乎没有进入 reducer 函数。但是 Redux 给出了温馨提示：自定义中间件（middleware）实现异步 action。
+// 看来我们的方向是正确的，可中间件（middleware）又是什么呢？
 
-// Just to reassure you, our action creator asyncSayActionCreator_1 is well-written and will work as expected
-// as soon as we've figured out what middleware is and how to use it.
+// 我向你保证 action creator asyncSayActionCreator_1 不仅没有问题，而且只要我们搞清楚 middleware 的概念并掌握它的使用方法，
+// 这个异步 action creator 就会按照我们所设想的结果执行的。
 
-// Go to next tutorial: 09_middleware.js
+// 开始下节教程：09_middleware.js
