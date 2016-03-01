@@ -7,8 +7,8 @@
 // 到最后，我只是在应用不同的 flux 框架（Reflux、Flummox、FB Flux）的文档，
 // 并且努力去把它们和那些理论性的概念（action/actions creator、store、dispatcher 等等）给联系起来。
 // 等我用了 Redux 之后，我才发现原来flux比我想象的要简单很多。
-// 这些都归功于 Redux 良好的设计和移除了许多其它框架引入的“反样板代码功能（anti-boilerplate features）”。
-// 我现在觉得用 Redux 来学习 flux 比用其他框架来学习要很好多。
+// 这些都归功于 Redux 通过优良的设计来减少样板文件，而其它框架则是为了减少样板文件却又引入了很多新的代码。
+// 我现在觉得用通过 Redux 来学习 flux 比通过其他框架高效得多。
 // 这就是为什么我想分享给大家，用我自己的话来说，
 // 通过关注 Redux 的用法来理解 flux 的概念。
 
@@ -54,11 +54,11 @@
 //   "action creators" -> action -> dispatcher -> callback
 // - View 看起来像 React views (或者其他什么的)
 
-// 所以，flux 就只是一个新词汇表么？不全是，但是词汇表是很重要的，
+// 所以，flux 就只是一个新名词么？不全是，但是新名词是很重要的，
 // 因为通过引入这些新术语我们可以更准确地表述各种专业术语。
 // 举一个例子，获取数据是一个 action，一个点击是一个 action，
 // 一个input变化也是一个action等等。我们都已经习惯了从我们的应用里分发 action，
-// 只是以不同的方式调用它们。 不同于直接修改 Model 和 View，
+// 只是以不同的方式称呼它们。 不同于直接修改 Model 和 View，
 // Flux 确保所有 action 首先通过一个dispatcher，
 // 然后再是store，最后通知所有的store观测者。
 
@@ -82,7 +82,7 @@
 
 // 来看一下我们是如何避免 Store A 和 Store B 直接相关联的。 
 // 每一个 Store 只能被一个 action 修改，别无他选。
-// 并且当所有 Store 回应了 action 后，最终所有 View 都会更新。由此可见，数据总是以一种方式进行流动：
+// 并且当所有 Store 回应了 action 后，最终所有 View 都会更新。由此可见，数据总是沿一个方向进行流动：
 //     action -> store -> view -> action -> store -> view -> action -> ...
 
 // 就像我们从一个 action 开始我们的用例，
