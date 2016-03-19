@@ -1,23 +1,20 @@
 // 章节 7 - dispatch-async-action-1.js
 
-// We previously saw how we can dispatch actions and how those actions will modify
-// the state of our application thanks to reducers.
+// 在上节教程中我们知道了如何分发 action 以及这些 action 如何通过 reducer 函数修改应用状态。
 
-// But so far we've only considered synchronous actions or, more exactly, action creators
-// that produce an action synchronously: when called an action is returned immediately.
+// 但是，到目前为止，我们只考虑了一种情况，同步 action，准确地说是同步 action creator，它同步地创建 action，
+// 也就是当 action creator 被调用时，action 会被立即返回。
 
-// Let's now imagine a simple asynchronous use-case:
-// 1) user clicks on button "Say Hi in 2 seconds"
-// 2) When button "A" is clicked, we'd like to show message "Hi" after 2 seconds have elapsed
-// 3) 2 seconds later, our view is updated with the message "Hi"
+// 我们来设想一个简单的异步场景：
+// 1）用户点击『Say Hi in 2 seconds』按钮
+// 2）当用户点击按钮『A』，我们希望经过两秒，视图显示一条消息『Hi』
+// 3）两秒过去之后，更新视图，显示消息『Hi』
 
-// Of course this message is part of our application state so we have to save it
-// in Redux store. But what we want is to have our store save the message
-// only 2 seconds after the action creator is called (because if we were to update our state
-// immediately, any subscriber to state's modifications - like our view -  would be notified right away
-// and would then react to this update 2 seconds too soon).
+// 当然这条消息是应用的状态之一，所以我们必然将其存储于 Redux store。
+// 但是我们希望的结果是，在调用 action creator 的两秒之后才把消息存入 store（因为如果立即更新状态，
+// 那么就会立即触发所有监听状态变更的订阅者 —— 例如视图，导致消息早于两秒显示）。
 
-// If we were to call an action creator like we did until now...
+// 如果我们按照目前调用 action creator 的方式...
 
 import { createStore, combineReducers } from 'redux'
 
@@ -52,16 +49,17 @@ store_0.dispatch(sayActionCreator('Hi'))
 
 console.log(new Date());
 console.log('store_0 state after action SAY:', store_0.getState())
-// Output (skipping initialization output):
+
+// 输出（忽略初始输出）：
 //     Sun Aug 02 2015 01:03:05 GMT+0200 (CEST)
 //     speaker was called with state {} and action { type: 'SAY', message: 'Hi' }
 //     Sun Aug 02 2015 01:03:05 GMT+0200 (CEST)
 //     store_0 state after action SAY: { speaker: { message: 'Hi' } }
 
 
-// ... then we see that our store is updated immediately.
+// ... 结果 store 被立即更新了。
 
-// What we'd like instead is an action creator that looks a bit like this:
+// 我们希望看到的结果应该类似于下面这样的代码：
 
 var asyncSayActionCreator_0 = function (message) {
     setTimeout(function () {
@@ -72,12 +70,10 @@ var asyncSayActionCreator_0 = function (message) {
     }, 2000)
 }
 
-// But then our action creator would not return an action, it would return "undefined". So this is not
-// quite the solution we're looking for.
+// 但是这样 action creator 返回的不是 action 而是 undefined。所以这并不是我们所期望的解决方法。
 
-// Here's the trick: instead of returning an action, we'll return a function. And this function will be the
-// one to dispatch the action when it seems appropriate to do so. But if we want our function to be able to
-// dispatch the action it should be given the dispatch function. Then, this should look like this:
+// 这里有个诀窍：不返回 action，而是返回 function。这个 function 会在合适的时机分发 action。但是如果我们希望
+// 这个 function 能够分发 action，那么就需要向它传入 dispatch 函数。于是代码类似如下：
 
 var asyncSayActionCreator_1 = function (message) {
     return function (dispatch) {
@@ -90,8 +86,7 @@ var asyncSayActionCreator_1 = function (message) {
     }
 }
 
-// Again you'll notice that our action creator is not returning an action, it is returning a function.
-// So there is a high chance that our reducers won't know what to do with it. But you never know, so let's
-// try it out and find out what happens...
+// 你可能再次注意到 action creator 返回的不是 action 而是 function。
+// 所以 reducer 函数很可能不知道如何处理这样的返回值，而你也并不清楚是否可行，那么让我们一起再做尝试，一探究竟。
 
-// Go to next tutorial: 08_dispatch-async-action-2.js
+// 开始下节教程：08_dispatch-async-action-2.js
