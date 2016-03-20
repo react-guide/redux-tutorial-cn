@@ -41,8 +41,8 @@ var reducer_1 = function (state = {}, action) {
     }
 }
 
-// 很显然，只有一个 reducer 是hold不住我们整个应用中所有 action 操作的
-// （好吧，事实上它是hold得住的，但这会变得很难维护。）
+// 很显然，只有一个 reducer 是hold不住我们整个应用中所有 action 操作的（好吧，事实上它是hold得住的，
+// 但这会变得很难维护。）
 
 // 幸运的是，Redux 不关心我们到底是只有一个 reducer ，还是有一打（12个）reducer 。
 // 如果我们有多个 reducer ，Redux 能帮我们合并成一个。
@@ -71,8 +71,8 @@ var itemsReducer = function (state = [], action) {
 // 我希望你特别留意赋给每个 reducer 的初始 state ： 
 //     1. 赋给 userReducer 的初始 state 是一个空对象，即 {}
 //     2. 赋给 itemsReducer 的初始 state 是一个空数组，即 []
-// 赋予不同类型的值是为了说明 reducer 是可以处理任何类型的数据结构的。你完全可以选择那些符合
-// 你的需求的数据结构作为 state 的值。（例如，字面量对象、数组、布尔值、字符串或其它固定结构）
+// 赋予不同类型的值是为了说明 reducer 是可以处理任何类型的数据结构的。你完全可以选择那些符合你的需求的
+// 数据结构作为 state 的值。（例如，字面量对象、数组、布尔值、字符串或其它固定结构）
 
 // 在这种多个 reducer 的模式下，我们可以让每个 reducer 只处理整个应用的部分 state 。
 
@@ -102,23 +102,23 @@ var store_0 = createStore(reducer)
 // itemsReducer was called with state [] and action { type: '@@redux/INIT' }
 
 // 正如你从输出中看到的，每个 reducer 都被正确地调用了（但接收了个 init action @@redux/INIT ）。
-// 这个 action 是什么鬼？这是 combineReducers 实施的一次安全检查，确保 reducer 永远不会返回 undefined 。
-// 请注意,在 combineReducers 中第一次调用 init action 时，其实是随机 action 来的，但它们有个共同的目的
-// (即是做一个安全检查)。
+// 这个 action 是什么鬼？这是 combineReducers 实施的一次安全检查，用以确保 reducer 永远不会返回
+// undefined 。请注意,在 combineReducers 中第一次调用 init action 时，其实是随机 action 来的，
+// 但它们有个共同的目的 (即是做一个安全检查)。
 
 console.log('store_0 state after initialization:', store_0.getState())
 // 输出：
 // store_0 state after initialization: { user: {}, items: [] }
 
-// 有趣的是，我们发现 Redux 正确处理了 state 的各个部分。
-// 最终的 state 完全是一个简单的对象，由 userReducer 和 itemsReducer 返回的部分 state 共同组成。
+// 有趣的是，我们发现 Redux 正确处理了 state 的各个部分。最终的 state 完全是一个简单的对象，由
+// userReducer 和 itemsReducer 返回的部分 state 共同组成。
 // {
 //     user: {}, // {} is the slice returned by our userReducer
 //     items: [] // [] is the slice returned by our itemsReducer
 // }
 
-// 由于我们为每个 reducer 初始化了一个特殊的值（userReducer 的是空对象 {} ，itemsReducer 的是空数组 [] ）,
-// 所以在最终 Redux 的 state 中找到那些值并不是巧合。
+// 由于我们为每个 reducer 初始化了一个特殊的值（userReducer 的是空对象 {} ，itemsReducer 的是空数
+// 组 [] ）,所以在最终 Redux 的 state 中找到那些值并不是巧合。
 
 // 现在，关于 reducer 如何工作我们有了一个很好的方式。是时候去看看当 action 被分发（dispatch）时会对
 // Redux 的 state 有什么影响。
