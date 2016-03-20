@@ -133,6 +133,8 @@ var store_0 = createStore(reducer)
 // as random actions (to do a sanity check).
 // 正如你从输出中看到的，每个 reducer 都被正确地调用了（接收了 init action @@redux/INIT ）。
 // 这个 action 是什么鬼？这是 combineReducers 实施的一个安全检查，确保 reducer 永远不会返回 undefined 。
+// 请注意,在 combineReducers 中第一次调用 init action 时，其实是随机 action 来的，但它们有个共同的目标
+// (做一个安全检查)
 
 console.log('store_0 state after initialization:', store_0.getState())
 // Output:
@@ -140,6 +142,8 @@ console.log('store_0 state after initialization:', store_0.getState())
 
 // It's interesting to note that Redux handles our slices of state correctly,
 // the final state is indeed a simple hash made of the userReducer's slice and the itemsReducer's slice:
+// 有趣的是，我们发现 Redux 正确处理了 state 的各个部分。
+// 最终的 state 完全是一个简单的对象，由 userReducer 和 itemsReducer 返回的部分 state 共同组成。
 // {
 //     user: {}, // {} is the slice returned by our userReducer
 //     items: [] // [] is the slice returned by our itemsReducer
@@ -147,8 +151,12 @@ console.log('store_0 state after initialization:', store_0.getState())
 
 // Since we initialized the state of each of our reducers with a specific value ({} for userReducer and
 // [] for itemsReducer) it's no coincidence that those values are found in the final Redux state.
+// 由于我们为每个 reducer 初始化了一个特殊的值（userReducer 的是空对象 {} ，itemsReducer 的是空数组 [] ）,
+// 在最终 Redux 的 state 中找到那些值并不是巧合。
 
 // By now we have a good idea of how reducers will work. It would be nice to have some
 // actions being dispatched and see the impact on our Redux state.
+// 现在，关于 reducer 如何工作我们有了一个很好的方式。是时候去看看当 action 被分发（dispatch）时会对
+// Redux state 有什么影响。
 
-// Go to next tutorial: 06_dispatch-action.js
+// 继续下一个教程: 06_dispatch-action.js
