@@ -74,17 +74,16 @@ var itemsReducer = function (state = [], action) {
 // 赋予不同类型的值是为了说明 reducer 是可以处理任何类型的数据结构的。你完全可以选择那些符合
 // 你的需求的数据结构作为 state 的值。（例如，字面量对象、数组、布尔值、字符串或其它固定结构）
 
-// 在这种多个 reducer 的模式下，我们可以让每个 reducer 只处理整个应用的 state 中的一部分。
+// 在这种多个 reducer 的模式下，我们可以让每个 reducer 只处理整个应用的部分 state 。
 
 // 但我们需要知道，createStore 只接收一个 reducer 函数。
 
 // 那么，我们怎么合并所有的 reducer ？ 我们又该如何告诉 Redux 每个 reducer 只处理一部分 state 呢？
 // 其实这很简单。我们使用 combineReducers 辅助函数。
-// combineReducers 接收一个 [对象](what-is-hash) 并返回一个[函数](what-is-func)，当 combineReducers 被调用时，它会去调用每个 reducer ，
-// 并把返回的每一块 state 重新组合成一个大 state 对象（也就是 Redux 中的 Store）。
+
+// combineReducers 接收一个对象（hash）并返回一个函数，当 combineReducers 被调用时，它会去调用每个
+// reducer ，并把返回的每一块 state 重新组合成一个大 state 对象（也就是 Redux 中的 Store）。
 // 长话短说，下面演示一下如何使用多个 reducer 创建一个 Redux 实例：
-[what-is-hash]: "https://github.com/camsong/redux-in-chinese/blob/master/docs/api/combineReducers.md#参数"
-[what-is-func]: "https://github.com/camsong/redux-in-chinese/blob/master/docs/api/combineReducers.md#返回值"
 
 import { createStore, combineReducers } from 'redux'
 
@@ -104,8 +103,8 @@ var store_0 = createStore(reducer)
 
 // 正如你从输出中看到的，每个 reducer 都被正确地调用了（但接收了个 init action @@redux/INIT ）。
 // 这个 action 是什么鬼？这是 combineReducers 实施的一次安全检查，确保 reducer 永远不会返回 undefined 。
-// 请注意,在 combineReducers 中第一次调用 init action 时，其实是随机 action 来的，但它们有个共同的目标
-// (即是做一个安全检查)
+// 请注意,在 combineReducers 中第一次调用 init action 时，其实是随机 action 来的，但它们有个共同的目的
+// (即是做一个安全检查)。
 
 console.log('store_0 state after initialization:', store_0.getState())
 // 输出：
