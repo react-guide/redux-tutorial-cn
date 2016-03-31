@@ -77,9 +77,7 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // 理解 Redux 可以无条件绑定到 React 上是很重要的。Redux 是一个”为 Javascript 应用而生的可预测的状态容器“，
 // 你有很多方式去使用它，而 React 应用只不过是其中一个。
 
-// In that perspective we would be a bit lost if it wasn't for react-redux (https://github.com/rackt/react-redux).
 // 从这个角度看，如果没有 react-redux (https://github.com/rackt/react-redux)，我们将失去很多。
-// Previously integrated inside Redux (before 1.0.0), this repository holds all the bindings we need to simplify
 // 在 Redux 1.0.0 之前它是包含在 Redux 中的，这个库节省了我们很多时间，它包含了在 React 中使用 Redux 时所有的绑定。
 
 // 回到订阅这件事，为什么我们这个订阅函数看上去非常简单而且没有提供很多特性？
@@ -88,8 +86,8 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // 比如 Redux DevTools (https://github.com/gaearon/redux-devtools).
 
 // 但是最后我们还是需要一个更好的接口订阅我们的 store 变化。这也就是 react-redux 给带给我们的：
-// 一个 API 允许我们完美的填补原生的 Redux 订阅机制和开发者的期待之间的空缺，于是你不再需要直接使用订阅。你需要的只是
-// 使用 “provide” 和 ”connect“ 绑定，使你不必再关心隐含在内的订阅方法。
+// 一个 API 完美的填补了原生 Redux 订阅机制和开发者的期待之间的空缺，所以我们不再需要直接使用订阅。你需要的只是
+// 使用 “provide” 和 ”connect“ 绑定，而不必再关心隐含在内的订阅方法。
 
 // 所以，订阅方法依然会被我们使用，只不过它通过高度整合的接口替我们处理 redux state 的连接。
 
