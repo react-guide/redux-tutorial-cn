@@ -62,8 +62,10 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 
 // 我们的订阅回调成功的调用了，同时 store 现在包含了我们新增的条目。
 
-// 理论上，到这就可以停止了。我们的 Flux loop 已经闭合，我们理解了构造 Flux 的全部概念，实际上它也没那么神秘
-// 但是老实说，还有很多要讲的，为了让最后一个概念保持简单，我们有意的在例子中去掉了一些东西：
+// 理论上，到这就可以停止了。我们的 Flux loop 已经闭合，我们理解了构造 Flux 的全部概念，
+// 实际上它也没那么神秘。但是老实说，还有很多要讲的，
+// 为了让最后一个概念保持简单，
+// 我们有意的在例子中去掉了一些东西：
 
 // - 我们的订阅回调没有把 state 作为参数，为什么？
 // - 既然我们没有接受新的 state， 我们就被限定到了只能开发这个已经完成的 store (store_0) 所以这个办法在
@@ -74,24 +76,29 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 
 // 我们现在进入了一个”将 Redux 加入到 React“ 的领域。
 
-// 理解 Redux 可以无条件绑定到 React 上是很重要的。Redux 是一个”为 Javascript 应用而生的可预测的状态容器“，
+// 理解 Redux 可以无条件绑定到 React 上是很重要的。
+// Redux 是一个”为 Javascript 应用而生的可预测的状态容器“，
 // 你有很多方式去使用它，而 React 应用只不过是其中一个。
 
 // 从这个角度看，如果没有 react-redux (https://github.com/rackt/react-redux)，我们将失去很多。
-// 在 Redux 1.0.0 之前它是包含在 Redux 中的，这个库节省了我们很多时间，它包含了在 React 中使用 Redux 时所有的绑定。
+// 在 Redux 1.0.0 之前它是包含在 Redux 中的，这个库节省了我们很多时间，
+// 它包含了在 React 中使用 Redux 时所有的绑定。
 
-// 回到订阅这件事，为什么我们这个订阅函数看上去非常简单而且没有提供很多特性？
+// 回到订阅这件事，为什么我们这个订阅函数看上去非常简单
+// 而且没有提供很多特性？
 
-// 这就是 Redux 精彩之处了！ 它所有 API 都很抽象（包括订阅），支持高度扩展，允许开发者造出一些疯狂的轮子
+// 这就是 Redux 精彩之处了！ 它所有 API 都很抽象（包括订阅），
+// 支持高度扩展，允许开发者造出一些疯狂的轮子
 // 比如 Redux DevTools (https://github.com/gaearon/redux-devtools).
 
 // 但是最后我们还是需要一个更好的接口订阅我们的 store 变化。这也就是 react-redux 给带给我们的：
-// 一个 API 完美的填补了原生 Redux 订阅机制和开发者的期待之间的空缺，所以我们不再需要直接使用订阅。你需要的只是
+// 一个 API 完美的填补了原生 Redux 订阅机制和开发者的期待之间的空缺，
+// 所以我们不再需要直接使用订阅。你需要的只是
 // 使用 “provide” 和 ”connect“ 绑定，而不必再关心隐含在内的订阅方法。
 
-// 所以，订阅方法依然会被我们使用，只不过它通过高度整合的接口替我们处理 redux state 的连接。
+// 所以，订阅方法依然会被我们使用，
+// 只不过它通过高度整合的接口替我们处理 redux state 的连接。
 
-// We'll now cover those bindings and show how simple it is to wire your components to Redux's state.
 // 现在我们隐藏了那些绑定，并且展示了连接组件和 Redux's state 是很轻松的一件事。
 
 // 继续下一个教程: 11_Provider-and-connect.js
