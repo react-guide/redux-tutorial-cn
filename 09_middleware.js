@@ -16,9 +16,9 @@
 
 // action ---> dispatcher ---> middleware 1 ---> middleware 2 ---> reducers
 
-// 每当一个 action（或者其诸如异步 action creator 中的某个函数）被分发时，
+// 每当一个 action（或者其他诸如异步 action creator 中的某个函数）被分发时，
 // 我们的中间件就会被调用
-// 并且在需要的时候协助 action creator 分发直接的 action（或者什么都不做，
+// 并且在需要的时候协助 action creator 分发真正的 action（或者什么都不做，
 // 有时我们需要这么做）
 
 // 在 Redux 中，中间件是纯粹的函数，
@@ -38,8 +38,8 @@
 //    （因为你的中间件或 action creator 可能需要从 state 中读取数据）
 // 2) 第二层提供 next 函数，它允许你显式的将处理过的输入传递给下一个中间件或 Redux
 //    （这样 Redux 才能调用所有 reducer)。
-// 3) 第三层提供从上一个中间件或 dispatch 的 action，
-//     可以调用下一个中间件（让 action 继续流动) 或者
+// 3) 第三层提供从上一个中间件或从 dispatch 传递来的 action，
+//     这个 action 可以调用下一个中间件（让 action 继续流动) 或者
 //     以想要的方式处理 action。
 
 // 学习过函数式编程的人可能会意识到给上述代码提供了一个机会来使用
@@ -75,7 +75,7 @@ var thunkMiddleware = function ({ dispatch, getState }) {
 // 辅助函数：applyMiddleware.
 
 // applyMiddleware 接收所有中间件作为参数，返回一个供 Redux createStore 调用的函数。
-// 当最后这个函数被调用时，它会产生一个 Store 增强器，用来所所有中间件应用到 Store 的 dispatch 上。
+// 当最后这个函数被调用时，它会产生一个 Store 增强器，用来将所有中间件应用到 Store 的 dispatch 上。
 // (来自 https://github.com/rackt/redux/blob/v1.0.0-rc/src/utils/applyMiddleware.js)
 
 // 下面就是如何将一个中间件应用到 Redux store：
@@ -129,7 +129,7 @@ store_0.dispatch(asyncSayActionCreator_1('Hi'))
 //     Mon Aug 03 2015 00:01:22 GMT+0200 (CEST) 'Dispatch action now:'
 //     speaker was called with state {} and action { type: 'SAY', message: 'Hi' }
 
-// 当我们调用异步 action creator 两秒之后，action 成功的分发出去。
+// 当我们调用异步 action creator 两秒之后，action 成功被分发出去。
 
 // 你可能会好奇，一个中间件如何 log 出所有已分发的 action ，
 // 是这样：
