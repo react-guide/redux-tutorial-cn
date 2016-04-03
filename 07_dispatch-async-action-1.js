@@ -2,13 +2,13 @@
 
 // 在上节教程中我们知道了如何分发 action 以及这些 action 如何通过 reducer 函数修改应用状态。
 
-// 但是，到目前为止，我们只考虑了一种情况，同步 action，准确地说是同步 action creator，它同步地创建 action，
+// 但是，到目前为止，我们只考虑了一种情况，同步场景下的 action，准确地说是同步 action creator，它创建同步的 action，
 // 也就是当 action creator 被调用时，action 会被立即返回。
 
 // 我们来设想一个简单的异步场景：
-// 1）用户点击『Say Hi in 2 seconds』按钮
-// 2）当用户点击按钮『A』，我们希望经过两秒，视图显示一条消息『Hi』
-// 3）两秒过去之后，更新视图，显示消息『Hi』
+// 1）用户点击“Say Hi in 2 seconds”按钮
+// 2）当用户点击按钮 A，我们希望经过两秒，视图显示一条消息 Hi
+// 3）两秒过去之后，更新视图，显示消息 Hi
 
 // 当然这条消息是应用的状态之一，所以我们必然将其存储于 Redux store。
 // 但是我们希望的结果是，在调用 action creator 的两秒之后才把消息存入 store（因为如果立即更新状态，
@@ -72,8 +72,8 @@ var asyncSayActionCreator_0 = function (message) {
 
 // 但是这样 action creator 返回的不是 action 而是 undefined。所以这并不是我们所期望的解决方法。
 
-// 这里有个诀窍：不返回 action，而是返回 function。这个 function 会在合适的时机分发 action。但是如果我们希望
-// 这个 function 能够分发 action，那么就需要向它传入 dispatch 函数。于是代码类似如下：
+// 这里有个诀窍：不返回 action，而是返回 function。这个 function 会在合适的时机 dispatch action。但是如果我们希望
+// 这个 function 能够 dispatch action，那么就需要向它传入 dispatch 函数。于是代码类似如下：
 
 var asyncSayActionCreator_1 = function (message) {
     return function (dispatch) {

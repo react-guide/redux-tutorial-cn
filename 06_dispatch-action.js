@@ -1,6 +1,6 @@
 // 章节 6 - dispatch-action.js
 
-// 迄今为止我们的关注点都是绑定我们的 reducer(s)，但我们还未 dispatch 任何一个 action。
+// 迄今为止我们的关注点都是绑定我们的 reducer，但我们还未 dispatch 任何一个 action。
 // 我们将会用到上一章的 reducer ，并用它们处理一些 action：
 
 var userReducer = function (state = {}, action) {
@@ -45,13 +45,13 @@ console.log('store_0 state after initialization:', store_0.getState())
 // store_0 state after initialization: { user: {}, items: [] }
 
 // 让我们来 dispatch 我们的第一个 action... 记住在 'simple-action-creator.js' 中所提到的：
-//     "为了 dispatch 一个 action，我们需要... 一个 dispatch 函数。" Captain obvious
+//     "为了 dispatch 一个 action，我们需要一个 dispatch 函数。"
 
 // 我们所看到的 dispatch 函数，是 Redux 提供的，并且它会将 action 传递
-// 给任何一个 reducer！disparch 函数本质上是 Redux
-// 的实例属性 "dispatch"
+// 给任何一个 reducer！dispatch 函数本质上是 Redux
+// 的实例的属性 "dispatch"
 
-// 简单地调用一下，去 dispatch 一个 action：
+// dispatch 一个 action：
 
 store_0.dispatch({
     type: 'AN_ACTION'
@@ -60,7 +60,7 @@ store_0.dispatch({
 // userReducer was called with state {} and action { type: 'AN_ACTION' }
 // itemsReducer was called with state [] and action { type: 'AN_ACTION' }
 
-// 每一个 reducer 都有效地被调用了，但是没有一个 action type 是 reducer 需要的，
+// 每一个 reducer 都被调用了，但是没有一个 action type 是 reducer 需要的，
 // 因此 state 是不会发生变化的：
 
 console.log('store_0 state after action AN_ACTION:', store_0.getState())
@@ -87,13 +87,13 @@ console.log('store_0 state after action SET_NAME:', store_0.getState())
 // 输出：
 // store_0 state after action SET_NAME: { user: { name: 'bob' }, items: [] }
 
-// 在应用中，我们已经实现了第一个 action 并且用它改变了 state！
+// 我们刚刚处理了一个 action，并且它改变了应用的 state！
 
 // 但是这似乎太简单了，并且还不足以充当一个真实的用例。例如，
 // 如果我们要在 dispatch action 之前做一些异步的操作，那应该怎么做呢？
 // 我们将在下一章节 "dispatch-async-action.js" 中讨论这个问题
 
-// 迄今为止，这些就是我们应用中的流程
+// 至止，我们接触的应用流程是这样的：
 // ActionCreator -> Action -> dispatcher -> reducer
 
 // 下一章节：07_dispatch-async-action-1.js

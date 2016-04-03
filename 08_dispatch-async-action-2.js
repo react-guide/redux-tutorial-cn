@@ -43,10 +43,10 @@ store_0.dispatch(asyncSayActionCreator_1('Hi'))
 //     Error: Invariant Violation: Actions must be plain objects. Use custom middleware for async actions.
 //     ...
 
-// 我们所设计的 function 似乎没有进入 reducer 函数。但是 Redux 给出了温馨提示：自定义中间件（middleware）实现异步 action。
+// 我们所设计的 function 似乎没有进入 reducer 函数。但是 Redux 给出了温馨提示：使用自定义中间件（middleware）来支持异步 action。
 // 看来我们的方向是正确的，可中间件（middleware）又是什么呢？
 
 // 我向你保证 action creator asyncSayActionCreator_1 不仅没有问题，而且只要我们搞清楚 middleware 的概念并掌握它的使用方法，
-// 这个异步 action creator 就会按照我们所设想的结果执行的。
+// 这个异步 action creator 就会按照我们所设想的结果执行。
 
 // 开始下节教程：09_middleware.js
