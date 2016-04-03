@@ -1,15 +1,15 @@
 // 章节 10 - state-subscriber.js
 
-// We're close to having a complete Flux loop but we still miss one critical part:
+// 我们接近完成一个完整的 Flux 闭环了，现在只差一个至关重要的环节：
 
 //  _________      _________       ___________
 // |         |    | Change  |     |   React   |
 // |  Store  |----▶ events  |-----▶   Views   |
 // |_________|    |_________|     |___________|
 
-// Without it, we cannot update our views when the store changes.
+// 没有它，在 store 改变时我们就不能更新我们的视图。
 
-// Fortunately, there is a very simple way to "watch" over our Redux's store updates:
+// 幸运的是，监视 Redux store 更新有一个很简单的办法：
 
 /*
     store.subscribe(function() {
@@ -19,9 +19,9 @@
     })
 */
 
-// Yeah... So simple that it almost makes us believe in Santa Claus again.
+// 是的，简单到我们都开始重新相信圣诞老人了(译者注：2333，对不起这个比喻太幽默了）
 
-// Let's try this out:
+// 试一下这段代码:
 
 import { createStore, combineReducers } from 'redux'
 
@@ -44,7 +44,7 @@ var store_0 = createStore(reducer)
 
 store_0.subscribe(function() {
     console.log('store_0 has been updated. Latest store state:', store_0.getState());
-    // Update your views here
+    // 在这里更新你的视图
 })
 
 var addItemActionCreator = function (item) {
@@ -56,49 +56,49 @@ var addItemActionCreator = function (item) {
 
 store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 
-// Output:
+// 输出:
 //     ...
 //     store_0 has been updated. Latest store state: { items: [ { id: 1234, description: 'anything' } ] }
 
-// Our subscribe callback is correctly called and our store now contains the new item that we added.
+// 我们的订阅回调成功的调用了，同时 store 现在包含了我们新增的条目。
 
-// Theoretically speaking we could stop here. Our Flux loop is closed, we understood all concepts that make
-// Flux and we saw that it is not that much of a mystery. But to be honest, there is still a lot to talk
-// about and a few things in the last example were intentionally left aside to keep the simplest form of this
-// last Flux concept:
+// 理论上，到这就可以停止了。我们的 Flux loop 已经闭合，我们理解了构造 Flux 的全部概念，
+// 实际上它也没那么神秘。但是老实说，还有很多要讲的，
+// 为了让最后一个概念保持简单，
+// 我们有意的在例子中去掉了一些东西：
 
-// - Our subscriber callback did not receive the state as a parameter, why?
-// - Since we did not receive our new state, we were bound to exploit our closured store (store_0) so this
-//     solution is not acceptable in a real multi-modules application...
-// - How do we actually update our views?
-// - How do we unsubscribe from store updates?
-// - More generally speaking, how should we integrate Redux with React?
+// - 我们的订阅回调没有把 state 作为参数，为什么？
+// - 既然我们没有接受新的 state， 我们就被限定到了只能开发这个已经完成的 store (store_0) 所以这个办法在
+//     含有多个模块的应用下不可行。
+// - 我们究竟是怎么更新视图的？
+// - 怎么取消订阅？
+// - 更通俗的讲，我们怎么把 Redux 和 React 结合到一起？
 
-// We're now entering a more "Redux inside React" specific domain.
+// 我们现在进入了一个”将 Redux 加入到 React“ 的领域。
 
-// It is very important to understand that Redux is by no means bound to React. It is really a
-// "Predictable state container for JavaScript apps" and you can use it in many ways, a React
-// application just being one of them.
+// 理解 Redux 可以无条件绑定到 React 上是很重要的。
+// Redux 是一个”为 Javascript 应用而生的可预测的状态容器“，
+// 你有很多方式去使用它，而 React 应用只不过是其中一个。
 
-// In that perspective we would be a bit lost if it wasn't for react-redux (https://github.com/rackt/react-redux).
-// Previously integrated inside Redux (before 1.0.0), this repository holds all the bindings we need to simplify
-// our life when using Redux inside React.
+// 从这个角度看，如果没有 react-redux (https://github.com/rackt/react-redux)，我们将失去很多。
+// 在 Redux 1.0.0 之前它是包含在 Redux 中的，这个库节省了我们很多时间，
+// 它包含了在 React 中使用 Redux 时所有的绑定。
 
-// Back to our "subscribe" case... Why exactly do we have this subscribe function that seems so simple but at
-// the same time also seems to not provide enough features?
+// 回到订阅这件事，为什么我们这个订阅函数看上去非常简单
+// 而且没有提供很多特性？
 
-// Its simplicity is actually its power! Redux, with its current minimalist API (including "subscribe") is
-//  highly extensible and this allows developers to build some crazy products like the Redux DevTools
-// (https://github.com/gaearon/redux-devtools).
+// 这就是 Redux 精彩之处了！ 它所有 API 都很抽象（包括订阅），
+// 支持高度扩展，允许开发者造出一些疯狂的轮子
+// 比如 Redux DevTools (https://github.com/gaearon/redux-devtools).
 
-// But in the end we still need a "better" API to subscribe to our store changes. That's exactly what react-redux
-// brings us: an API that will allow us to seamlessly fill the gap between the raw Redux subscribing mechanism
-// and our developer expectations. In the end, you won't need to use "subscribe" directly. Instead you will
-// use bindings such as "provide" or "connect" and those will hide from you the "subscribe" method.
+// 但是最后我们还是需要一个更好的接口订阅我们的 store 变化。这也就是 react-redux 给带给我们的：
+// 一个 API 完美的填补了原生 Redux 订阅机制和开发者的期待之间的空缺，
+// 所以我们不再需要直接使用订阅。你需要的只是
+// 使用 “provide” 和 ”connect“ 绑定，而不必再关心隐含在内的订阅方法。
 
-// So yeah, the "subscribe" method will still be used but it will be done through a higher order API that
-// handles access to redux state for you.
+// 所以，订阅方法依然会被我们使用，
+// 只不过它通过高度整合的接口替我们处理 redux state 的连接。
 
-// We'll now cover those bindings and show how simple it is to wire your components to Redux's state.
+// 现在我们隐藏了那些绑定，并且展示了连接组件和 Redux's state 是很轻松的一件事。
 
-// Go to next tutorial: 11_Provider-and-connect.js
+// 继续下一个教程: 11_Provider-and-connect.js
