@@ -92,9 +92,9 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // 比如 Redux DevTools (https://github.com/gaearon/redux-devtools).
 
 // 但是最后我们还是需要一个更好的接口订阅我们的 store 变化。这也就是 react-redux 给带给我们的：
-// 一个 API 完美的填补了原生 Redux 订阅机制和开发者的期待之间的空缺，
-// 所以我们不再需要直接使用订阅。你需要的只是
-// 使用 “provide” 和 ”connect“ 绑定，而不必再关心隐含在内的订阅方法。
+// 一个完美填补原生 Redux 订阅机制和开发者的期待之间的空缺的 API ，
+// 这样我们不再需要直接使用订阅。而只是
+// 使用 “provide” 和 ”connect“ 绑定，不必再关心隐含在内的订阅方法。
 
 // 所以，订阅方法依然会被我们使用，
 // 只不过它通过高度整合的接口替我们处理 redux state 的连接。
