@@ -82,18 +82,14 @@ console.log('store_3 state after initialization:', store_3.getState())
 
 // 到目前为止，我们都还没有得到一个新 state， 因为我们还没有真的派发过任何 action 。
 // 不过在最后一个例子里，有几个点值得注意：
-
+//
 //     0) 我假设了 action 里一定包含了一个 type 跟一个 value 。type 基本上是 flux action 已经约定俗成的，
 //        而 value 属性可以是任何类型的。
-
 //     1) 这里有个常见模式：在 reducer 里用 switch 来响应对应的 action 。
-
 //     2) 用 switch 的时候， **永远** 不要忘记放个 “default” 来返回 “state”，否则，
 //        你的 reducer 可能会返回 “undefined” （等于你的 state 就丢了）
-
 //     3) 注意 { message: action.value } 是怎么被合并到当前 state 来形成新 state 的，
 //        这全要感谢牛逼的 ES7 notation (Object Spread): { ...state, message: action.value }
-
 //     4) 还要注意：之所以这个例子能用ES7 Object Spread notation ，是因为它只对 state 里的
 //         { message: action.value} 做了浅拷贝（也就是说， state 第一个层级的属性直接被 { message: action.value } 粗暴覆盖了 —— 与之相对，其实也可以做个优雅的合并 ）
 //         但是如果数据结构更复杂或者是嵌套的，那处理state更新的时候，很可能还需要考虑一些完全不同的做法：
@@ -101,7 +97,7 @@ console.log('store_3 state after initialization:', store_3.getState())
 //        - 可以考虑： Object.assign (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 //        - 可以考虑： 手工合并
 //        - 又或者考虑用其它任何能满足需要且适合 state 结构的方法，Redex 对此是全无预设的方式的（要记得 Redux 只是个状态的容器）。
-//
+
 // 现在开始，我们要在 reducer 里处理 action 了，我们将会有多个 reducer 并会组合它们。
 
 // 前往下一个章节: 05_combine-reducers.js
