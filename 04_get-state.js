@@ -1,6 +1,6 @@
 // 章节 4 - get-state.js
 
-// 你该如何从我们的Redux实例中取出state？
+// 如何从 Redux 实例中读取 state ？
 
 import { createStore } from 'redux'
 
@@ -11,27 +11,18 @@ var reducer_0 = function (state, action) {
 var store_0 = createStore(reducer_0)
 // 输出: reducer_0 was called with state undefined and action { type: '@@redux/INIT' }
 
-// 你可以调用getState来取出Redux为我们保存的state
+// 为了读取 Redux 保存的 state，你可以调用 getState
 
 console.log('store_0 state after initialization:', store_0.getState())
 // 输出: store_0 state after initialization: undefined
 
-// So the state of our application is still undefined after the initialization? Well of course it is,
-// our reducer is not doing anything... Remember how we described the expected behavior of a reducer in
-// "about-state-and-meet-redux"?
-//     "A reducer is just a function that receives the current state of your application, the action,
-//     and returns a new state modified (or reduced as they call it)"
-// Our reducer is not returning anything right now so the state of our application is what
-// reducer() returns, hence "undefined".
+// 都已经初始化过了，难道程序的 state 还是 undefined 的？没错，正是如此，
+// 到目前为止，我们的 reducer 还什么事都没做过…… 你是否还有印象，我们在 "about-state-and-meet-redux" 那一章里是怎么描述一个 reducer 的预期行为的？
+//   “一个 reducer 只是一个函数，它能收到程序当前的 state 与 action，
+//    然后返回一个 modify（又或者学别人一样称之为 reduce ）过的新 state ”
+// 我们的 reducer 目前什么都不返回，所以程序的 state 当然只能是 reducer() 返回的那个叫 “undefined” 的东西。
 
-// 可是难道在初始化之后,我们程序的state依然是undefined？是的，当然是这样，我们的reducer还什么都没做……
-// 你是否还记得，在"about-state-and-meet-redux"那一章里，我们是怎么描述一个reducer的预期行为的？
-//   “一个reducer只是一个函数，它可以收到程序的当前state，action，
-//    并返回一个新的修改（或者像他们那样叫reduced）过的state）”
-// 我们的reducer目前还什么都不返回，所以我们程序的状态就是reducer()所返回的东西，也就是“undefined”。
-
-// Let's try to send an initial state of our application if the state given to reducer is undefined:
-// 让我们试着在reducer收到的state是undefined时候给我们的程序发送一个初始状态：
+// 接下来，我们试着在 reducer 收到 undefined 的 state 时，给程序发一个初始状态：
 
 var reducer_1 = function (state, action) {
     console.log('reducer_1 was called with state', state, 'and action', action)
@@ -48,11 +39,8 @@ var store_1 = createStore(reducer_1)
 console.log('store_1 state after initialization:', store_1.getState())
 // 输出：store_1 state after initialization: {}
 
-// As expected, the state returned by Redux after initialization is now {}
-// 正如预期的那样，现在Redux初始化以后返回的state变成了{}
-
-// There is however a much cleaner way to implement this pattern thanks to ES6:
-// 感谢ES6，现在这个模式实现起来比以前清晰很多
+// 如我们所愿，现在 Redux 初始化以后返回的 state 变成 {} 了
+// 感谢ES6，这个模式现在实现起来很清晰，
 
 var reducer_2 = function (state = {}, action) {
     console.log('reducer_2 was called with state', state, 'and action', action)
@@ -61,20 +49,16 @@ var reducer_2 = function (state = {}, action) {
 }
 
 var store_2 = createStore(reducer_2)
-// Output: reducer_2 was called with state {} and action { type: '@@redux/INIT' }
+// 输出: reducer_2 was called with state {} and action { type: '@@redux/INIT' }
 
 console.log('store_2 state after initialization:', store_2.getState())
-// Output: store_2 state after initialization: {}
+// 输出: store_2 state after initialization: {}
 
-// You've probably noticed that since we've used the default parameter on state parameter of reducer_2,
-// we no longer get undefined as state's value in our reducer's body.
-// 你大概已经注意到了，自从我们给reducer_2的state参数传了默认值，
-// 我们就再也不会在reducer的函数体里取到一个undefined的state了。
+// 估计你已经发现了，我们给 reducer_2 的 state 参数传了默认值之后，
+// reducer 就不会再取到 undefined 的 state 了。
 
-// Let's now recall that a reducer is only called in response to an action dispatched and
-// let's fake a state modification in response to an action type 'SAY_SOMETHING'
-// 我们现在回忆一下，一个reducer只是作为对一个response的回应而调用，
-// 我们来在response里伪造一个action类型是'SAY_SOMETIHG'的state修改
+// 小结一下：调用  reducer ，只是为了响应一个派发来的 action 。
+// 接下来，我们在 response 里模拟一个 state 修改，其响应的 action 类型是 'SAY_SOMETIHG'
 
 var reducer_3 = function (state = {}, action) {
     console.log('reducer_3 was called with state', state, 'and action', action)
@@ -91,36 +75,33 @@ var reducer_3 = function (state = {}, action) {
 }
 
 var store_3 = createStore(reducer_3)
-// Output: reducer_3 was called with state {} and action { type: '@@redux/INIT' }
+// 输出: reducer_3 was called with state {} and action { type: '@@redux/INIT' }
 
 console.log('store_3 state after initialization:', store_3.getState())
-// Output: redux state after initialization: {}
+// 输出: redux state after initialization: {}
 
-// Nothing new in our state so far since we did not dispatch any action yet. But there are few
-// important things to pay attention to in the last example:
-//     0) I assumed that our action contains a type and a value property. The type property is mostly
-//        a convention in flux actions and the value property could have been anything else.
-//     1) You'll often see the pattern involving a switch to respond appropriately
-//        to an action received in your reducers
-//     2) When using a switch, NEVER forget to have a "default: return state" because
-//        if you don't, you'll end up having your reducer return undefined (and lose your state).
-//     3) Notice how we returned a new state made by merging current state with { message: action.value },
-//        all that thanks to this awesome ES7 notation (Object Spread): { ...state, message: action.value }
-//     4) Note also that this ES7 Object Spread notation suits our example because it's doing a shallow
-//        copy of { message: action.value } over our state (meaning that first level properties of state
-//        are completely overwritten - as opposed to gracefully merged - by first level property of
-//        { message: action.value }). But if we had a more complex / nested data structure, you might choose
-//        to handle your state's updates very differently:
-//        - using Immutable.js (https://facebook.github.io/immutable-js/)
-//        - using Object.assign (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
-//        - using manual merge
-//        - or whatever other strategy that suits your needs and the structure of your state since
-//          Redux is absolutely NOT opinionated on this (remember, Redux is a state container).
+// 到目前为止，我们都还没有得到一个新 state， 因为我们还没有真的派发过任何 action 。
+// 不过在最后一个例子里，有几个点值得注意：
 
-// 到目前为止，因为我们还没有dispatch过任何action，所以我们还没有得到任何新state。不过在最后一个例子里，有几点很重要的事情值得特别注意：
-//      0) 
+//     0) 我假设了 action 里一定包含了一个 type 跟一个 value 。type 基本上是 flux action 已经约定俗成的，
+//        而 value 属性可以是任何类型的。
 
-// Now that we're starting to handle actions in our reducer let's talk about having multiple reducers and
-// combining them.
+//     1) 这里有个常见模式：在 reducer 里用 switch 来响应对应的 action 。
 
-// Go to next tutorial: 05_combine-reducers.js
+//     2) 用 switch 的时候， **永远** 不要忘记放个 “default” 来返回 “state”，否则，
+//        你的 reducer 可能会返回 “undefined” （等于你的 state 就丢了）
+
+//     3) 注意 { message: action.value } 是怎么被合并到当前 state 来形成新 state 的，
+//        这全要感谢牛逼的 ES7 notation (Object Spread): { ...state, message: action.value }
+
+//     4) 还要注意：之所以这个例子能用ES7 Object Spread notation ，是因为它只对 state 里的
+//         { message: action.value} 做了浅拷贝（也就是说， state 第一个层级的属性直接被 { message: action.value } 粗暴覆盖了 —— 与之相对，其实也可以做个优雅的合并 ）
+//         但是如果数据结构更复杂或者是嵌套的，那处理state更新的时候，很可能还需要考虑一些完全不同的做法：
+//        - 可以考虑： Immutable.js (https://facebook.github.io/immutable-js/)
+//        - 可以考虑： Object.assign (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
+//        - 可以考虑： 手工合并
+//        - 又或者考虑用其它任何能满足需要且适合 state 结构的方法，Redex 对此是全无预设的方式的（要记得 Redux 只是个状态的容器）。
+//
+// 现在开始，我们要在 reducer 里处理 action 了，我们将会有多个 reducer 并会组合它们。
+
+// 前往下一个章节: 05_combine-reducers.js
