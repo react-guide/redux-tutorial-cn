@@ -40,7 +40,8 @@ console.log('store_1 state after initialization:', store_1.getState())
 // 输出：store_1 state after initialization: {}
 
 // 如我们所愿，现在 Redux 初始化以后返回的 state 变成 {} 了
-// 感谢ES6，这个模式现在实现起来很清晰，
+//
+// 感谢ES6，这个模式现在实现起来很清晰：
 
 var reducer_2 = function (state = {}, action) {
     console.log('reducer_2 was called with state', state, 'and action', action)
