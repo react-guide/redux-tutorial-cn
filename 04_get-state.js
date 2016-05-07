@@ -79,7 +79,7 @@ var store_3 = createStore(reducer_3)
 // 输出: reducer_3 was called with state {} and action { type: '@@redux/INIT' }
 
 console.log('store_3 state after initialization:', store_3.getState())
-// 输出: redux state after initialization: {}
+// 输出: store_3 state after initialization: {}
 
 // 到目前为止，我们都还没有得到一个新 state， 因为我们还没有真的派发过任何 action 。
 // 不过在最后一个例子里，有几个点值得注意：
