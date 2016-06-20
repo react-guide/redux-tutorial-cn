@@ -22,7 +22,7 @@ import * as reducers from './reducers'
 // 为简单起见我们不讨论它, 但要感谢它让你在有真实数据的情况下来初始化reducers。
 // 例如在一个同构/通用应用中, 你能从服务器端拉取数据, 然后序列化并传递到客户端,
 // 你的Redux store就能用这些数据来初始化。
-// 这里我们没传任何数据, 但最好要指导这个createStore是做什么的
+// 这里我们没传任何数据, 但最好要知道这个createStore是做什么的
 export default function(data) {
   var reducer = combineReducers(reducers)
   var finalCreateStore = applyMiddleware(promiseMiddleware)(createStore)
