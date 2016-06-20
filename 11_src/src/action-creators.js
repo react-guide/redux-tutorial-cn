@@ -1,38 +1,33 @@
-// Tutorial 12 - Provider-and-connect.js
+// 教程 12 - Provider-and-connect.js
 
-// We're using Bluebird (https://github.com/petkaantonov/bluebird) as promise library but you could really
-// use any promise lib you want.
+// 我们使用Bluebird (https://github.com/petkaantonov/bluebird) 作为promise库, 但其实你可以用任何你喜欢的。
 import Promise from 'bluebird'
 
-// Our action creator just gets the current time in a delayed fashion to illustrate the use of the promise
-// middleware.
+// 我们的action creator在一段延迟后获取当前时间, 用于演示使用promise中间件。
 
-// The promise middleware works by waiting for either:
-// 1) an action with this format:
+// promise中间件工作时会等待2种情况:
+// 1) 一个如下格式的action:
 //    {
-//      types: [REQUEST, SUCCESS, FAILURE], // actions types given in this specific order
+//      types: [REQUEST, SUCCESS, FAILURE], // action的 types 需要按该顺序给出
 //      promise: function() {
-//        // return a promise
+//        // 返回一个 promise
 //      }
 //    }
-// 2) or anything else what would be passed to the next middleware or to Redux (actually, with this
-//    implementation of the promise middleware, the "anything else" has to NOT contain a promise
-//    property to be passed to the next middleware or Redux)
+// 2) 其他任何可以传递给下一个中间件, 或者Redux(事实上, 在这个promise中间件的实现中, "其他任何"传递到下一个中间件或Redux时, 必须不包含promise属性)
 
-// When the promise middleware receives this action, it will create 2 actions from this one:
-// 1 action for the REQUEST and later 1 action for the SUCCESS or the FAILURE of the action creator.
+// 当该promise中间件接收到这个action, 它会创建2个action:
+// 一个action给action creator的REQUEST, 后一个action给action creator的SUCCESS 或 FAILURE
 
-// Again, the code for the promise middleware is not complicated and it is worth having a look
-// at it (./promise-middleware.js)
+// 再者, 这个promise中间件的代码并不复杂, 值得去看一看 (./promise-middleware.js)
 
-// The action is delayed by "delay" ms passed as a parameter of the action creator. Try to change
-// this value to verify that the delay correctly impacts our UI.
+// 下面的action使用"delay"作为一个参数传递, 用来延迟该action creator。
+// 尝试改变延迟的值, 验证它是否正确影响了我们UI。
 export function getTime(delay) {
   return {
     types: ['GET_TIME_REQUEST', 'GET_TIME_SUCCESS', 'GET_TIME_FAILURE'],
     promise: () => {
       return new Promise((resolve, reject) => {
-        // Just simulating an async request to a server via a setTimeout
+        // 通过 setTimeout 来模拟一个异步服务器请求
         setTimeout(() => {
           const d = new Date()
           const ms = ('000' + d.getMilliseconds()).slice(-3)
