@@ -1,12 +1,13 @@
 // 教程 12 - Provider-and-connect.js
 
-// 我们的教程快结束了, 离对 Redux 有一个好的认识只差一步: 如何从 store 中的 state 读取, 和以及如何派发 actions?
+// 我们的教程快结束了, 离对 Redux 有一个好的认识只差一步:
+// 如何从 store 中的 state 读取, 和以及如何派发 actions?
 
 // 这两个问题可以用 react-redux 的 connect 绑定一并解决。
 
 // 如我们之前解释的, 当使用 Provider 组件的时候, 我们允许应用中所有组件访问 Redux。
 // 但这个访问只能通过没有配备说明文档的功能 "React 的 context" 来完成。
-// 为了避开这如"黑魔法"般的 React API , React-Redux 暴露了一个函数, 这样你就能在组件的 类中使用它。
+// 为了避开这如"黑魔法"般的 React API , React-Redux 暴露了一个函数, 这样你就能在组件的类中使用它。
 
 // 我们讨论的这个函数就是 "connect" , 它能让我们用 Redux 的 store 字面值与组件连接上。
 // 这样一来, 它就能让你 store 中的 dispatch 函数通过组件的 props 传递,
@@ -57,7 +58,7 @@ import * as actionCreators from './action-creators'
 
 class Home extends React.Component {
   onTimeButtonClick (delay) {
-      // 当用户点击这个按钮的时候, 该句柄会派发一个action来响应。
+      // 当用户点击这个按钮的时候, 该句柄会派发一个 action 来响应。
       // 这里我们使用的 dispatch 函数由 props 中的 connect "自动"提供。
       // 还有多种其他的方法来调用已经绑定到 dispatch 中的 actionCreator, 这意味着可以向 "connect" 提供第二个参数:
       // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
@@ -149,7 +150,15 @@ export default ConnectedHome
   export default class MyClass {}
 */
 
-// Applying this syntax to redux connect, you can replace:
+// 在 Redux 的 connect 中使用修饰器语法, 可以用:
+
+/*
+ let mapStateToProps = (state) => { ... }
+ @connect(mapStateToProps)
+ export default class MyClass {}
+ */
+
+// 替换:
 
 /*
   let mapStateToProps = (state) => { ... }
@@ -157,18 +166,13 @@ export default ConnectedHome
   export default connect(mapStateToProps)(MyClass)
 */
 
-// by:
 
-/*
-  let mapStateToProps = (state) => { ... }
-  @connect(mapStateToProps)
-  export default class MyClass {}
-*/
+// 如你所见, 组件类中的高阶组件函数写法更加含蓄了:
+// @connect(mapStateToProps)
+// 而不是我们自己调用它:
+// @connect(mapStateToProps)(Myclass)
+// 有些人觉得这样写更优雅, 但有的人不喜欢, 因为这样隐藏了背后真正发生的事情, 或是不理解修饰器是如何工作的。
+// 记住, 修饰器目前为实验性功能, 如何使用 "connect" 取决于你自己,
+// 在别处的文章、教程、项目模版中, 常可以看到这两种语法。
 
-// As you can see the application of the HOC function on the component class is now made implicit ( @connect(mapStateToProps) )
-// instead of calling it ourselves ( @connect(mapStateToProps)(Myclass) ). Some find this approach more elegant, others
-// dislike the fact that it's hiding what is really happening and many just don't get how decorators works. Knowing all that
-// and remembering that decorators are still experimental, you can now decide by youselves which "connect" usage you
-// prefer and you won't be suprised to find both syntax in the many articles, tutorials, starter kits, etc. out there.
-
-// Go to ./12_final-words.js for our last advice about what to do now...
+// 转到 ./12_final-words.js 去看我们最后的建议...
