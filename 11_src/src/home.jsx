@@ -19,8 +19,8 @@
 // the actual component class you want to connect.
 // 这样一个函数(指 "connect") 被称之为高阶组件 (HOC, Higher Order Component)。
 // 高阶组件(译者注: 原文为 Higher Order functions, 可能写错了)来源于"函数设计模式", 这种设计可以在不使用继承的情况下向其添加功能与行为 (component, store, ...)
-// 这种方式有利于构造继承, 而且也是开发 React 应用的优先方法(但不是仅限的方法)。
-// 下面有更多关于高阶组件 (HOC) 与构造的文章:
+// 这种方式有利于合成继承, 而且也是开发 React 应用的优先方法(但不是仅限的方法)。
+// 下面有更多关于高阶组件 (HOC) 与合成的文章:
 // - https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750#.lpp7we7mx
 // - http://natpryce.com/articles/000814.html
 
