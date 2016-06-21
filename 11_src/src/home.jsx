@@ -51,8 +51,8 @@
 
 import React from 'react'
 import { connect } from 'react-redux'
-// 我们用 ES6 的 import 写法来获取所有的 action creator, 如同我们在 reducers 中那样。
-// 如果你还没看过我们的 action creator, 转到 ./action-creators.js 去看看。
+// 我们用 ES6 的 import 写法来获取所有的 action 创建函数, 如同我们在 reducers 中那样。
+// 如果你还没看过我们的 action 创建函数, 转到 ./action-creators.js 去看看。
 import * as actionCreators from './action-creators'
 
 class Home extends React.Component {
