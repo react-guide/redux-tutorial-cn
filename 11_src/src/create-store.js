@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 这里没有很多要说的， 现在你已经看到过这些很多次， 而且应该对它们很熟悉了...
 

@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 这个文件是我们 JS 包的入口。 在这里将创建我们的 Redux store，实例化我们的 React 应用根组件然后将它附加到DOM中。
 

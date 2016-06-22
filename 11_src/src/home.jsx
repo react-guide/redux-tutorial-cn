@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 我们的教程快结束了，离对 Redux 有一个好的认识只差一步:
 // 如何从 store 中的 state 读取，和以及如何派发 action?

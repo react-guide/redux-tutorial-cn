@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 这个文件包含我们应用仅有的一个 reducer。 它的表现对于你来说没什么新鲜的，除了将一个 action(GET_TIME) 的3个方面，写成3个专用的 action...
 // 这样做允许我们做很漂亮的实时UI更新，就像这样:

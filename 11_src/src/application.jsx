@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 现在是时候见识 redux-react(https://github.com/rackt/react-redux)
 // 如何在 Provider 组件中为我们做初次绑定了。

@@ -1,4 +1,4 @@
-// 教程 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
 // 终于到这里了! 准备好在 React 应用中使用 Redux 了吗?
 
