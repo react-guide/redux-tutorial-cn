@@ -1,20 +1,20 @@
-// Tutorial 12 - Provider-and-connect.js
+// 教程 12 - Provider-and-connect.js
 
-// Our tutorial is almost over and the only missing piece to leave you with a good overview of Redux is:
-// How do we read from our store's state and how do we dispatch actions?
+// 到这为止我们的教程就基本上结束了, 关于Redux唯一剩下的问题
+// 就是我们如何能读取store里面的state以及如何进行action的分发。
 
-// Both of these questions can be answered using a single react-redux's binding: connect.
+// 这两个问题都能够使用connect去解决。
 
-// As we previously explained, when using the Provider component we allow all components of our app to
-// access Redux. But this access can only be made through the undocumented feature "React's context". To
-// avoid asking you to use such a "dark" React API, React-Redux is exposing a function that you can use
-// on a component class.
+// 正如我们前面所讲解的, 当我们使用Provider组件时,　我们允许我们应用中的所有组件访问Redux.
+// 但是这种访问只能使用不正式的特性React's context来实现,
+// 为了避免这种"黑科技"式 (不规范) 的API调用,
+// React-Redux为我们暴露了一个组件中的函数让我们可以使用。
 
-// The function we're talking about is "connect" and it allows to literally connect your component with your Redux's store.
-// By doing so, it provides your store's dispatch function through a component's prop and also adds any
-// properties you want to expose as part of your store's state.
+// 这个函数就是Connect, 它让我们可以实现一个组件和Redux store的绑定,
+// 通过这种绑定可以让store通过组件的属性(prop)分发函数, 
+// 也可以根据我们自己的需要增加任何需要暴露的属性作为store里面state的一部分。
 
-// Using "connect", you'll turn a dumb component into a smart component with very little code overhead
+// 使用了Connect, 你可以通过添加很少的代码让一个组件变得更"聪明", 
 // (https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
 // "connect" is a function that takes as parameters few mapping functions and that returns a function expecting
@@ -104,8 +104,7 @@ class Home extends React.Component {
   }
 }
 
-// This is our select function that will extract from the state the data slice we want to expose
-// through props to our component.
+// 这是我们的select函数, 它会把我们需要在属性(prop)中对我们的组件暴露的数据从state中抽离出来
 const mapStateToProps = (state/*, props*/) => {
   return {
     frozen: state._time.frozen,
@@ -148,14 +147,14 @@ export default ConnectedHome
   export default somedecorator(MyClass)
 */
 
-// You can write:
+// 你可以这么写:
 
 /*
   @somedecorator
   export default class MyClass {}
 */
 
-// Applying this syntax to redux connect, you can replace:
+// 通过这种特性使用redux connect, 我们可以把如下代码:
 
 /*
   let mapStateToProps = (state) => { ... }
@@ -163,7 +162,7 @@ export default ConnectedHome
   export default connect(mapStateToProps)(MyClass)
 */
 
-// by:
+// 替换成:
 
 /*
   let mapStateToProps = (state) => { ... }
