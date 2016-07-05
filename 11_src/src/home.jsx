@@ -50,8 +50,7 @@
 // 为了完成提取部分组建的 props 作为 state 的动作, (Ex: state.items[props.someID]).
 // 组件的 props 也被作为参数提供。
 // "mapStateToProps" 被期望返回所有你希望暴露给你的组件的 props, 通常通过一个对象常量 (object literal)返回。
-// 你可以在返回前修改取得的 state 值。
-// 下面是一些简单的 Connect 应用 (在定义组件之后)
+// 你可以在返回前修改取得的 state 值。下面是一些简单的 Connect 应用 (在定义组件之后)
 
 import React from 'react'
 import { connect } from 'react-redux'
