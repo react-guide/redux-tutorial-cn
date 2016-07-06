@@ -1,80 +1,80 @@
 // 教程 12 - Provider-and-connect.js
 
-// 到这为止我们的教程就基本上结束了, 关于Redux唯一剩下的问题
-// 就是我们如何能读取store里面的state以及如何进行action的分发。
+// 到这为止我们的教程就基本上结束了, 关于 Redux 唯一剩下的问题
+// 就是我们如何能读取 store 里面的 state 以及如何进行action的分发。
 
-// 这两个问题都能够使用connect去解决。
+// 这两个问题都能够使用 Connect 去解决。
 
-// 正如我们前面所讲解的, 当我们使用Provider组件时,　我们允许我们应用中的所有组件访问Redux.
-// 但是这种访问只能使用不正式的特性React's context来实现,
-// 为了避免这种"黑科技"式 (不规范) 的API调用,
-// React-Redux为我们暴露了一个组件中的函数让我们可以使用。
+// 正如我们前面所讲解的, 当我们使用 Provider 组件时,　我们允许我们应用中的所有组件访问Redux.
+// 但是这种访问只能使用不正式的特性 React's context 来实现,
+// 为了避免这种"黑科技"式 (不规范) 的 API 调用,
+// React-Redux 为我们暴露了一个组件中的函数让我们可以使用。
 
-// 这个函数就是Connect, 它让我们可以实现一个组件和Redux store的绑定,
-// 通过这种绑定可以让store通过组件的属性(prop)分发函数, 
+// 这个函数就是 Connect , 它让我们可以实现一个组件和 Redux store 的绑定,
+// 通过这种绑定可以让store通过组件的属性 (prop) 分发函数, 
 // 也可以根据我们自己的需要增加任何需要暴露的属性作为store里面state的一部分。
 
-// 使用了Connect, 你可以通过添加很少的代码让一个组件变得更"聪明", 
+// 使用了 Connect , 你可以通过添加很少的代码让一个组件变得更"聪明", 
 // (https://medium.com/@dan_abramov/smart-and-dumb-components-7ca2f9a7c7d0).
 
-// "connect" is a function that takes as parameters few mapping functions and that returns a function expecting
-// the actual component class you want to connect. Such a function (connect) is called a Higher Order Component (HOC).
-// Higher Order functions comes from a functional pattern designed to add features / behaviors to
-// their inputs (component, store, ...) without using inheritance. This approach favors composition over inheritance
-// which is the prefered way to build React applications (actually this is not limited at all to React applications).
-// Read more about HOCs and composition here:
+// Connect 是一个接受一些映射函数作为参数, 并返回一个你想要链接的组件类函数, 的函数.
+// 这样的函数被叫做高层组件 (Higher Order Component (HOC))
+// HOC 函数是一种在不修改继承的情况下能够添加特性和行为到输入 (component, store) 中的函数模式。
+// 这种方式比较继承更强调构成,
+// 这也是创建 React 应用更建议的方式 (其实并没有这个限制)
+// 阅读更多关于 HOC 和 composition 的文档:
 // - https://medium.com/@dan_abramov/mixins-are-dead-long-live-higher-order-components-94a0d2f9e750#.lpp7we7mx
 // - http://natpryce.com/articles/000814.html
 
-// The "connect" HOC is designed to address all use-cases, from the most simple to the most
-// complex ones. In the present example, we're not going to use the most complex form of 'connect' but
-// you can find all information about it in the complete 'connect' API documentation here:
+// Connect "HOC" 主要被设计用于解决无论简单和困难的使用场景。
+// 在现有的例子中, 我们不会使用 Connect 最复杂的形式, 
+// 但是你可以在完整的 API 文档中找到有关的全部信息: 
 // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
-// Here is the complete 'connect' signature:
+// 以下是完整的 Connect 特征:
 // connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
-// and here is how you're supposed to use it:
+// 它的使用方法如下:
 /*
   const wrappedComponentClass = connect(...)(ComponentClass)
 */
 
-// We will only focus here on the first 'connect' parameter: mapStateToProps...
+// 我们在这里会主要讲解 Connect 的第一个参数: mapStateToProps
 
-// "connect" takes, as its first parameter, a function that will select which slice of your
-// state you want to expose to your component. This function is logically called a "selector" and
-// receives 2 parameters: the state of your store and the current props of your component.
-// You'll see below that we named this function "mapStateToProps". This name is just a semantic name
-// for our function that clearly expresses what the function does: it maps (read "extracts some of")
-//  the state to a few component props.
-// The props of the component are also provided as arguments to handle common cases like extracting a slice of your
-// state depending on a prop value (Ex: state.items[props.someID]).
-// "mapStateToProps" is expected to return the props that you wish to expose to your component (usually via
-// an object literal). It's up to you to eventually transform the state you're receiving before returning it.
-// You can have a look right at that simplest 'connect' usage below (just after the component class definition).
+// Connect 将一个选择你想要将哪一些 state 暴露给组件的函数作为第一个参数。
+// 这个函数我们一般称它为 Selector。
+// 它需要接受两个参数: 当前 store 的状态 (state) 以及当前组件的 prop。
+// 可以看见我们将这个函数命名为 "mapStateToProps",
+// 这个名字从字面意义上告诉我们它的作用: 
+// 它创造了从 state 到一些组件 props 的映射 (map)
+
+// 为了完成提取部分组建的 props 作为 state 的动作, (Ex: state.items[props.someID]).
+// 组件的 props 也被作为参数提供。
+// "mapStateToProps" 被期望返回所有你希望暴露给你的组件的 props, 通常通过一个对象常量 (object literal)返回。
+// 你可以在返回前修改取得的 state 值。下面是一些简单的 Connect 应用 (在定义组件之后)
 
 import React from 'react'
 import { connect } from 'react-redux'
-// We use the same ES6 import trick to get all action creators and produce a hash like we did with
-// our reducers. If you haven't yet, go get a look at our action creator (./action-creators.js).
+// 我们会使用一些 ES6 中的 import 技巧来得到所有的 action creator 并生成一个哈希值, 
+// 就跟我们当时在 reducer 部分所做的一样。如果你还没有了解action creator的话, 去看看相关章节吧~  (./action-creators.js).
 import * as actionCreators from './action-creators'
 
 class Home extends React.Component {
   onTimeButtonClick (delay) {
-    // This button handler will dispatch an action in response to a click event from a user.
-    // We use here the dispatch function "automatically" provided by connect in a prop.
-    // There are alternative ways to call actionCreators that are already bound to dispatch and those
-    // imply providing the second parameter to 'connect':
+    // 这个按钮处理器在用户的点击事件后会分发一个 action。
+    // 我们在这里会使用一个 Connect 提供的分发函数,
+    // 也有很多其他的调用被绑定到分发器的 actionCreator 的方式, 
+    // 这种方式提供了第二个 Connect 的参数：
     // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
-    // The "delay" value given to actionCreators.getTime is a delay to simulate an async work being done before we
-    // are able to get the current time. Try to change this value to verify that the delay correctly impacts our UI.
+    // 被传到 actionCreators.getTime 的 delay 值是为了在我们能得到当前时间之前模拟异步的工作,
+    // 试着修改这个值来正确影响我们的 UI
     this.props.dispatch(actionCreators.getTime(delay))
   }
   render () {
-
-    // Thanks to "connect", we're able to get specific selected data, through the props.
+    
+    // 因为 Connect 我们能够通过 props 取到特定的数据
     var { frozen, time, reduxState } = this.props
     var attrs = {}
-    const DELAY = 500 // in ms
+    const DELAY = 500 // 毫秒
 
     if (frozen) {
         attrs = {
@@ -94,7 +94,7 @@ class Home extends React.Component {
           Try to change this value (in <b>src/home.jsx - line 95</b>) to verify that the delay given correctly impacts our UI.
         </i>
         <br />
-        {/* We register our button "onClick" handler here: */}
+        {/* 我们在这里定义我们的点击处理器 */}
         <button { ...attrs } onClick={() => this.onTimeButtonClick(DELAY)}>Get time!</button>
         <pre>
           redux state = { JSON.stringify(reduxState, null, 2) }
@@ -104,13 +104,13 @@ class Home extends React.Component {
   }
 }
 
-// 这是我们的select函数, 它会把我们需要在属性(prop)中对我们的组件暴露的数据从state中抽离出来
+// 这是我们的 select 函数, 它会把我们需要在属性 (prop) 中对我们的组件暴露的数据从 state 中抽离出来
 const mapStateToProps = (state/*, props*/) => {
   return {
     frozen: state._time.frozen,
     time: state._time.time,
-    // It is very bad practice to provide the full state like that (reduxState: state) and it is only done here
-    // for you to see its stringified version in our page. More about that here:
+    // 像(reduxState: state) 这样提供整个 state 是一种不好的实现,
+    // 我们在这里这样写是为了让大家能看到我们页面字符串化的结果。更多信息请访问以下链接:
     // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#inject-dispatch-and-every-field-in-the-global-state
     reduxState: state,
   }
@@ -120,27 +120,27 @@ const ConnectedHome = connect(mapStateToProps)(Home)
 
 export default ConnectedHome
 
-// You might have noticed that thanks to redux, while we have a dynamic component that requires some state (to keep
-// the current time), this state is by no mean present inside the component. Our component only receives props with
-// needed data.
-// What we have here is called a stateless component. You should always try to have more stateless components (presented
-// above as dumb components) in your applications than stateful ones because they are much more reusable.
-// As suggested in "onTimeButtonClick" handler, we could even go further by passing our click callback as a prop
-// via "connect" second parameter "mapDispatchToProps". Doing so, we would extract our button behavior outside of
-// our component, making it even more reusable by allowing for a different click behavior.
-// Reusability might seem like a fancy overused concept but what having a reusable component also means, is that it's
-// one component that can be very easily tested (because you can then inject in your component whatever data and
-// test handlers you want and easily ensure its correct behavior).
+// 也许你会发现因为 Redux 让我们可以拥有需要一些状态 (比如保存当前时间) 的动态组件,
+// 而这个状态并不在组件当中存在,
+// 我们的组件只会接受含有需要的数据的 prop。
+// 我们现在拥有了一个无状态组件 (stateless component), 相比较有状态的组件, 
+// 我们在编码中应该尽可能更多的使用无状态组件, 因为它们更易于被复用。
+// 正如在 "onTimeButtonClick" 处理器中建议的一样, 我们甚至可以把点击的回调函数作为一个 prop
+// 从 Connect 的第二个参数 "mapDispatchToProps" 中传入。这么做的话, 我们就可以在组件之外获得按钮的行为,
+// 通过允许另一种点击行为让我们更易于重用这个按钮。
+// 可复用性的概念也许看起来被过度强调了, 但是拥有一个可复用的组件通常也意味着
+// 这个组件能够很简单的被测试 (因为你可以将任何你想要的数据和处理器插入你的组件中,
+// 从而很简单的保证它的正确运行) 
 
-// Before going to ./12_final-words.js, read this side-note about an alternative way to use "connect" HOC...
+// 在去看 ./12_final-words.js 之前, 请仔细看以下另一种使用 Connect HOC 的方法。
 
-// Because connect(...) returns a function that accept a class and returns another class, you can use it as
-// an ES7 decorator if you want to. Decorators are an experimental ES7 features that make it possible to annotate
-// and modify classes and properties at design time (https://github.com/wycats/javascript-decorators).
+// 因为 Connect 返回了一个接受一个 class 并返回另一个 class 的函数，
+// 我们可以用它作为 ES7 的 decorator。Decorator 是一种 ES7 的实验新特性, 
+// 让我们能够在设计的时候注释和修改 class 和属性 (https://github.com/wycats/javascript-decorators).
 
-// This feature being experimental, it is subject to change and breakage. This means that by using it today, you must be
-// fully aware of and accept the uncertainty regarding its evolution. Decorators provide syntax sugar to write the
-// code above slightly differently. Instead of writing:
+// 作为一个试验中的特性, 也许会有变化或问题。
+// 如果你选择从现在开始使用的话, 请注意和接受今后的不确定性。
+// Decorator 提供了一些代码的语法糖让我们的代码变得稍稍不同。原来的这种写法:
 
 /*
   class MyClass {}
@@ -170,10 +170,10 @@ export default ConnectedHome
   export default class MyClass {}
 */
 
-// As you can see the application of the HOC function on the component class is now made implicit ( @connect(mapStateToProps) )
-// instead of calling it ourselves ( @connect(mapStateToProps)(Myclass) ). Some find this approach more elegant, others
-// dislike the fact that it's hiding what is really happening and many just don't get how decorators works. Knowing all that
-// and remembering that decorators are still experimental, you can now decide by youselves which "connect" usage you
-// prefer and you won't be suprised to find both syntax in the many articles, tutorials, starter kits, etc. out there.
+// 正如我们看到的, 高层组件的函数现在被作为隐函数使用 ( @connect(mapStateToProps) )
+// 而不是直接调用它们自身  ( @connect(mapStateToProps)(Myclass) )。 有些人觉得这种写法更加优雅,
+// 而另一些则因为这种写法隐藏了实际发生的事情会当人无法理解 decorator 是如何工作的。
+// 知道了这些并了解到 decorator 现在仍在实验阶段的话, 你就可以决定你偏好使用哪一种 Connect 的形式,
+// 也不会因为在其他文章, 教学和新手包中看到两种语法而感到惊讶了
 
-// Go to ./12_final-words.js for our last advice about what to do now...
+// 去 ./12_final-words.js 可以看到我们最后的一些建议
