@@ -18,7 +18,7 @@
 //   DX (开发体验) ，当我们在编辑器中修改代码时，
 //   在浏览器中可以热加载来显示效果。
 
-// 提醒一下正在 React 开发者：本应用是基于 React 0.14 构建的
+// 提醒一下正在使用 React 的开发者：本应用是基于 React 0.14 构建的
 
 // 我不想在这里详细地解释如何设置 Webpack Dev Server 和 React Hot Loader，
 // 因为在 React Hot Loader 的文档中已经说的很好了。
