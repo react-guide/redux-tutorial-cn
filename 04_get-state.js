@@ -97,7 +97,7 @@ console.log('store_3 state after initialization:', store_3.getState())
 //        - 可以考虑： Immutable.js (https://facebook.github.io/immutable-js/)
 //        - 可以考虑： Object.assign (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/assign)
 //        - 可以考虑： 手工合并
-//        - 又或者考虑用其它任何能满足需要且适合 state 结构的方法，Redex 对此是全无预设的方式的（要记得 Redux 只是个状态的容器）。
+//        - 又或者考虑用其它任何能满足需要且适合 state 结构的方法，Redux 对此是全无预设的方式的（要记得 Redux 只是个状态的容器）。
 
 // 现在开始，我们要在 reducer 里处理 action 了，我们将会有多个 reducer 并会组合它们。
 
