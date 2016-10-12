@@ -99,6 +99,6 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // 所以，订阅方法依然会被我们使用，
 // 只不过它通过高度整合的接口替我们处理 redux state 的连接。
 
-// 现在我们隐藏了那些绑定，并且展示了连接你的组件和Redux的state是很轻松的一件事。
+// 现在我们隐藏了那些绑定，并且展示了连接你的组件和 Redux 的 state 是很轻松的一件事。
 
 // 继续下一个教程: 11_Provider-and-connect.js
