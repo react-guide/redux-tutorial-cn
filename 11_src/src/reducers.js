@@ -1,18 +1,14 @@
-// Tutorial 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
-// This file holds the one and only reducer of our application. Its behavior is nothing new to you
-// except maybe its handling of three aspects of an action (GET_TIME) that become 3 dedicated actions...
-// This approach allows us to do some nice real time updates in our UI like this:
-// 1) When we receive GET_TIME_REQUEST action, we modify the state to say that some part of the
-//    UI should be frozen (because there is a pending operation)
-// 2) When we receive GET_TIME_SUCCESS (or GET_TIME_FAILURE) later on, we modify the state to
-//    unfreeze our application and to add the new data we received.
+// 这个文件包含我们应用仅有的一个 reducer。 它的表现对于你来说没什么新鲜的，除了将一个 action(GET_TIME) 的3个方面，写成3个专用的 action...
+// 这样做允许我们做很漂亮的实时UI更新，就像这样:
+// 1) 当收到 GET_TIME_REQUEST action，我们修改 state 来告诉 UI 的一部分需要被冻结(因为有一个挂起的操作)
+// 2) 当收到 GET_TIME_SUCCESS (或 GET_TIME_FAILURE)之后，我们修改 state 为不冻结应用程序，然后添加收到的新数据。
 
 var initialTimeState = {}
 
-// The reducer is named with leading "_" to avoid having: state.time.time (time twice) when reading
-// from state. So it's just a personal preference here and you may not need this depending on
-// how your reducers are named and what properties they expose in Redux's store.
+// 下面的 reducer 命名用"_"开头，用于从 state 中读取的时候，避免 state.time.time (出现两个 time )。
+// 这只是个人偏好你可以不必这样做，它取决于你如何对各个 reducer 命名，和在 Redux 的 store 中暴露哪些属性。
 export function _time(state = initialTimeState, action) {
   console.log('_time reducer called with state ', state , ' and action ', action);
 
@@ -29,7 +25,7 @@ export function _time(state = initialTimeState, action) {
         frozen: false
       }
     case 'GET_TIME_FAILURE':
-      // we could add an error message here, to be printed somewhere in our application
+        // 这里我们可以添加一个错误消息，打印到我们应用程序的某个地方
       return {
         ...state,
         frozen: false

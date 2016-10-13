@@ -1,30 +1,28 @@
-// Tutorial 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
-// There is not much to say here, you've seen this plenty of times and it should feel pretty
-// familiar to you now...
+// 这里没有很多要说的， 现在你已经看到过这些很多次， 而且应该对它们很熟悉了...
 
-// One thing to notice though: we're not using the thunk middleware that we've seen before. Instead
-// we use a promise middleware solution that will allow us to handle asynchronous action creators and
-// to do some nice real time updates on our UI (could also do some optimistic updates).
-// This middleware was discussed here: https://github.com/rackt/redux/issues/99 and it is used
-// in this very good react-redux-universal-example: https://github.com/erikras/react-redux-universal-hot-example
-// that I strongly suggest you get a look at (later, not right now ;)).
+// 尽管这样，但还是有一点要注意: 我们这里不使用之前用过的 thunk middleware。
+// 替而代之的是 promise middleware，它允许我们处理异步的 action 创建函数,
+// 然后漂亮的实时处理UI更新(也可以做一些乐观的更新)。
+// 这个中间件在 https://github.com/rackt/redux/issues/99有讨论,
+// 在 react-redux-universal-example: https://github.com/erikras/react-redux-universal-hot-example中有非常好的使用案例,
+// 我强烈推荐你去看一看(之后不是现在;))。
 
 import { createStore, applyMiddleware, combineReducers } from 'redux'
-// You can go and see the code for this middleware, it's not very complicated and makes a good
-// exercise to sharpen your understanding on middlewares.
+// 你可以去看一看这个中间件，它不是很复杂，而且能帮你锻炼出对中间件更敏锐的理解。
 import promiseMiddleware from './promise-middleware'
-// We'll just have one reducer in this application but the ES6 import notation below is
-// pretty interesting to import and produce a reducers hash in one go. Have a look in
-// ./reducers.js to see what our reducer actually do (no magic there).
+
+// 在本应用中我们仅有一个 reducer,
+// 但是下面用 ES6 写的 import，有趣且一气呵成的导入并生成了多个 reducer。
+// 去 ./reducers.js 看看我们的 reducer 究竟是怎么做的(这里没有魔法)。
 import * as reducers from './reducers'
 
-// The data parameter that we see here is used to initialize our redux store with data. We didn't
-// talk about this yet for simplicity but thanks to it your reducers can be initialized
-// with real data if you already have some. For example in an isomorphic/universal app where you
-// fetch data server-side, serialize and pass it to the client, your Redux store can be
-// initialized with that data.
-// We're not passing any data here but it's good to know about this createStore's ability.
+// 这里看到的 data 参数是用于初始化 Redux store。
+// 为简单起见我们不讨论它，但要感谢它让你在有真实数据的情况下来初始化 reducer。
+// 例如在一个同构/通用应用中，你能从服务器端拉取数据，然后序列化并传递到客户端,
+// 你的 Redux store 就能用这些数据来初始化。
+// 这里我们没传任何数据，但最好要知道这个 createStore 是做什么的
 export default function(data) {
   var reducer = combineReducers(reducers)
   var finalCreateStore = applyMiddleware(promiseMiddleware)(createStore)
@@ -33,4 +31,4 @@ export default function(data) {
   return store
 }
 
-// Go to ./application.jsx to learn of the first Redux binding for React: the Provider component.
+// 转到 ./application.jsx，去学习使用 Provider 组件首次将 Redux 绑定到 React。
