@@ -74,10 +74,10 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // - 怎么取消订阅？
 // - 更通俗的讲，我们怎么把 Redux 和 React 结合到一起？
 
-// 我们现在进入了一个”将 Redux 加入到 React“ 的领域。
+// 我们现在进入了一个“将 Redux 加入到 React” 的领域。
 
 // 理解 Redux 可以无条件绑定到 React 上是很重要的。
-// Redux 是一个”为 Javascript 应用而生的可预测的状态容器“，
+// Redux 是一个“为 Javascript 应用而生的可预测的状态容器”，
 // 你有很多方式去使用它，而 React 应用只不过是其中一个。
 
 // 从这个角度看，如果没有 react-redux (https://github.com/rackt/react-redux)，我们将失去很多。
@@ -94,11 +94,11 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // 但是最后我们还是需要一个更好的接口订阅我们的 store 变化。这也就是 react-redux 给带给我们的：
 // 一个完美填补原生 Redux 订阅机制和开发者的期待之间的空缺的 API ，
 // 这样我们不再需要直接使用订阅。而只是
-// 使用 “provide” 和 ”connect“ 绑定，不必再关心隐含在内的订阅方法。
+// 使用 “provide” 和 “connect” 绑定，不必再关心隐含在内的订阅方法。
 
 // 所以，订阅方法依然会被我们使用，
 // 只不过它通过高度整合的接口替我们处理 redux state 的连接。
 
-// 现在我们隐藏了那些绑定，并且展示了连接组件和 Redux's state 是很轻松的一件事。
+// 现在我们隐藏了那些绑定，并且展示了连接你的组件和 Redux 的 state 是很轻松的一件事。
 
 // 继续下一个教程: 11_Provider-and-connect.js
