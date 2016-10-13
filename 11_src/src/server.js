@@ -1,35 +1,32 @@
-// Tutorial 12 - Provider-and-connect.js
+// 章节 12 - Provider-and-connect.js
 
-// Hi there! So you're ready to play with Redux in a React app?
+// 终于到这里了! 准备好在 React 应用中使用 Redux 了吗?
 
-// The application you're about to see could not be more minimalist (from a product point of view
-// and from a design point of view - sorry for the black and white)... We'll only focus
-// on the use of 2 main bindings of react-redux (https://github.com/gaearon/react-redux):
-// 1) the Provider component
-// 2) the connect function
+// 你看到的这个应用程序例子已经精简的不能再精简了(对一个产品和设计来说的话)...
+// 我们只关注了使用 react-redux 中2个主要的绑定 (https://github.com/gaearon/react-redux):
+// 1) Provider 组件
+// 2) connect 函数
 
-// But before we get to that, let's see the basic setup of this application and how it
-// will be served to browser...
+// 但在开始下一步之前，先看看为了使应用程序能在浏览器中访问到，需要如何做一些基本设置。
 
-// We won't use Express (http://expressjs.com/) in this app since we don't really need
-// it to serve a simple html page.
+// 该应用中我们没有用 Express (http://expressjs.com/)，因为在一个如此简单的 HTML 页面中，我们都不需要用到它。
 
-// "http" module will be used to create the http server
+// 这里我们使用 http 模块来创建一个 http 服务器
 import http from 'http'
 import React from 'react'
 
-// We create our main application server here. It will serve the same page on all URIs
-// so you won't find any route specific logic below (except for rejecting favicon request)
+// 这里创建应用程序主服务器。 它会伺服所有的 URI 到同一个页面上,
+// 所以这里并没有具体的路由逻辑，除了一个拒绝 favicon 请求的代码。
 var server = http.createServer(function(req, res) {
 
-  // Forget this, it's just to avoid serving anything when the browser automatically
-  // requests favicon (if not, this server would send back an html page).
+  // 别管这个，它仅仅用来取消浏览器对 favicon 的自动请求,
+  // 如果不这样做的话，该服务器会返回一个 HTML 页面。
   if (req.url.match('favicon.ico')) {
     return res.end()
   }
 
-  // And of course, here is our Application HTML that we're sending back to the browser.
-  // Nothing special here except the URI of our application JS bundle that points to our
+  // 当然还有，这里是我们应用程序返回给浏览器的 HTML。
+  // 没什么特别的，除了将应用程序的 JS 包地址指定到
   // webpack dev server (located at http://localhost:5051)
   res.write(
     `<!DOCTYPE html>
@@ -49,6 +46,6 @@ var server = http.createServer(function(req, res) {
 
 export default server
 
-// Go to ./index.jsx, where our app is initialized. For those of you who are not familiar with webpack,
-// index.jsx is defined as the entry point (the first file) of our JS bundle (in 12_src/webpack.config.js)
-// and is automatically executed when the JS bundle is loaded in our browser.
+// 转到 ./index.jsx，那是我们应用程序初始化的地方。
+// 为了让对 webpack 不熟悉的人更容易理解，其实 index.jsx 是被定义(在 12_src/webpack.config.js中) 为 JS 包的入口 (首个文件)
+// 当 JS 包被载入到浏览器后，它将被自动运行。
