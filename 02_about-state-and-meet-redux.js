@@ -9,7 +9,7 @@
 
 // 于是 Redux 登场。
 
-// Redux (https://github.com/rackt/redux) 是一个“可预测化状态的 JavaScript 容器”。
+// Redux (https://github.com/reactjs/redux) 是一个“可预测化状态的 JavaScript 容器”。
 
 // 我们先回顾上述提出的问题并用 Redux 的词汇表给出以下解答（部分词汇也来源于 Flux）：
 

@@ -29,7 +29,7 @@
 // Connect "HOC" 主要被设计用于解决无论简单和困难的使用场景。
 // 在现有的例子中, 我们不会使用 Connect 最复杂的形式,
 // 但是你可以在完整的 API 文档中找到有关的全部信息:
-// https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+// https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
 
 // 以下是完整的 Connect 特征:
 // connect([mapStateToProps], [mapDispatchToProps], [mergeProps], [options])
@@ -66,7 +66,7 @@ class Home extends React.Component {
     // 我们在这里会使用一个 Connect 提供的分发函数,
     // 也有很多其他的调用被绑定到分发器的 actionCreator 的方式,
     // 这种方式提供了第二个 Connect 的参数：
-    // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
+    // https://github.com/reactjs/react-redux/blob/master/docs/api.md#connectmapstatetoprops-mapdispatchtoprops-mergeprops-options
     // 被传到 actionCreators.getTime 的 delay 值是为了在我们能得到当前时间之前模拟异步的工作,
     // 试着修改这个值来正确影响我们的 UI
     this.props.dispatch(actionCreators.getTime(delay))
@@ -113,7 +113,7 @@ const mapStateToProps = (state/*, props*/) => {
     time: state._time.time,
     // 像 (reduxState: state) 这样提供整个 state 是一种不好的实现,
     // 我们在这里这样写是为了让大家能看到我们页面字符串化的结果。更多信息请访问以下链接:
-    // https://github.com/rackt/react-redux/blob/v4.0.0/docs/api.md#inject-dispatch-and-every-field-in-the-global-state
+    // https://github.com/reactjs/react-redux/blob/master/docs/api.md#inject-dispatch-and-every-field-in-the-global-state
     reduxState: state,
   }
 }

@@ -4,7 +4,7 @@ redux-tutorial
 > 本文档正在翻译中，欢迎认领 [Issue](https://github.com/react-guide/redux-tutorial-cn/issues)，和我们一起完善。  
 > 英文原版：https://github.com/happypoulp/redux-tutorial/
 
-这是一个很简短的教程，可以让你领略 Flux 和 [Redux](https://github.com/rackt/redux) 思想的精髓。
+这是一个很简短的教程，可以让你领略 Flux 和 [Redux](https://github.com/reactjs/redux) 思想的精髓。
 
 当你初次接触 Redux 时，[Redux 官方文档](https://github.com/camsong/redux-in-chinese)极其详尽，是你的首选。本教程不同点是，通过介绍 Redux 使用来向你展示 Flux 概念。如果你想了解更多细节，请参谋 Redux 官方文档。
 
