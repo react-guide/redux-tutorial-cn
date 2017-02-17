@@ -80,7 +80,7 @@ store_0.dispatch(addItemActionCreator({ id: 1234, description: 'anything' }))
 // Redux 是一个“为 Javascript 应用而生的可预测的状态容器”，
 // 你有很多方式去使用它，而 React 应用只不过是其中一个。
 
-// 从这个角度看，如果没有 react-redux (https://github.com/rackt/react-redux)，我们将失去很多。
+// 从这个角度看，如果没有 react-redux (https://github.com/reactjs/react-redux)，我们将失去很多。
 // 在 Redux 1.0.0 之前它是包含在 Redux 中的，这个库节省了我们很多时间，
 // 它包含了在 React 中使用 Redux 时所有的绑定。
 

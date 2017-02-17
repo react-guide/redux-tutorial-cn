@@ -5,7 +5,7 @@
 // 尽管这样，但还是有一点要注意: 我们这里不使用之前用过的 thunk middleware。
 // 替而代之的是 promise middleware，它允许我们处理异步的 action 创建函数,
 // 然后漂亮的实时处理UI更新(也可以做一些乐观的更新)。
-// 这个中间件在 https://github.com/rackt/redux/issues/99有讨论,
+// 这个中间件在 https://github.com/reactjs/redux/issues/99有讨论,
 // 在 react-redux-universal-example: https://github.com/erikras/react-redux-universal-hot-example中有非常好的使用案例,
 // 我强烈推荐你去看一看(之后不是现在;))。
 
