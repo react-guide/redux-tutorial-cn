@@ -13,10 +13,10 @@ redux-tutorial
 为了理解本项目中的示例代码，你需要了解一些 ES6，ES7（Object Spread）特性。同时本教程只针对 Redux 3.0.2 和 react-redux 4.0.0。
 
 ### 克隆项目
-`git clone https://github.com/happypoulp/redux-tutorial.git`
+`git clone https://github.com/react-guide/redux-tutorial-cn.git`
 
 ### 进入目录
-`cd redux-tutorial`
+`cd redux-tutorial-cn`
 
 ### 安装依赖
 `npm install`
