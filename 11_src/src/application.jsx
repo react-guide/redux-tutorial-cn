@@ -6,7 +6,7 @@
 // Provider 是一个 React 组件，它被设计用作于包裹你应用的根组件。
 // 它的目的是提供你的 Redux 实例给所有应用中的组件。
 // 我们不太关心它是如何做到的，你只需知道: 它用了 React 的上下文功能(context feature),
-// 它没有说明文档所已不必在意它，但你实在是好奇的话可以参考: https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html
+// 它没有说明文档所以不必在意它，但你实在是好奇的话可以参考: https://www.tildedave.com/2014/11/15/introduction-to-contexts-in-react-js.html
 
 import React from 'react'
 import Home from './home'
